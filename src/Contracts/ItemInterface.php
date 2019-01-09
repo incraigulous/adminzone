@@ -11,7 +11,7 @@ namespace Incraigulous\AdminZone\Contracts;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-interface ItemInterface extends Arrayable, Jsonable
+interface ItemInterface extends Arrayable, Jsonable, Objectable
 {
     public function view(): string;
     public function slug(): string;

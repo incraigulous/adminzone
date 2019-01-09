@@ -4,7 +4,7 @@ namespace Incraigulous\AdminZone\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 
-interface ResourceInterface extends ItemInterface
+interface ResourceInterface extends MenuItemInterface
 {
     public function getRepository(): RepositoryInterface;
     public function form(): FormInterface;
@@ -13,4 +13,5 @@ interface ResourceInterface extends ItemInterface
     public function filters(): array;
     public function columns(): array;
     public function lenses(): array;
+    public function menu(): array;
 }

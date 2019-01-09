@@ -6,7 +6,7 @@
 namespace Incraigulous\AdminZone\Tests;
 
 use Incraigulous\AdminZone\Fields\Field;
-use Incraigulous\AdminZone\Fields\Types\TextField;
+use Incraigulous\AdminZone\Fields\TextField;
 use Incraigulous\AdminZone\Elements;
 use Incraigulous\AdminZone\Sections\Section;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +18,7 @@ class ItemsTest extends TestCase
     {
         $items = new Elements([
             Section::create('1'),
-            Field::create(TextField::class, 'second'),
+            TextField::create('second'),
             Section::create('2')
         ]);
 
@@ -31,9 +31,9 @@ class ItemsTest extends TestCase
     public function testGetFields()
     {
         $items = new Elements([
-            Field::create(TextField::class, 'first'),
+            TextField::create('first'),
             Section::create('section'),
-            Field::create(TextField::class, 'second')
+            TextField::create('second')
         ]);
 
         $this->assertEquals(2, $items->getFields()->count());

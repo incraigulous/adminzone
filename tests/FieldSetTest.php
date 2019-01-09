@@ -3,7 +3,7 @@
 namespace Incraigulous\AdminZone\Tests;
 
 use Incraigulous\AdminZone\Fields\Field;
-use Incraigulous\AdminZone\Fields\Types\TextField;
+use Incraigulous\AdminZone\Fields\TextField;
 use Incraigulous\AdminZone\Sections\FieldSet;
 
 class FieldSetTest extends TestCase
@@ -27,8 +27,8 @@ class FieldSetTest extends TestCase
         $label = 'Your Name';
         $fieldset = FieldSet::create()
             ->setLabel($label)
-            ->field(TextField::class, 'First Name')
-            ->field(TextField::class, 'Last Name');
+            ->field(TextField::create('First Name'))
+            ->field(TextField::create('Last Name'));
 
         $array = $fieldset->toArray();
 
@@ -43,8 +43,8 @@ class FieldSetTest extends TestCase
         $label = 'Your Name';
         $fieldset = FieldSet::create()
             ->setLabel($label)
-            ->field(TextField::class, 'First Name')
-            ->field(TextField::class, 'Last Name');
+            ->field(TextField::create('First Name'))
+            ->field(TextField::create('Last Name'));
 
         $json = $fieldset->toJson();
 
@@ -58,20 +58,8 @@ class FieldSetTest extends TestCase
     public function testField()
     {
         $fieldset = FieldSet::create()
-            ->field(TextField::class, 'First Name')
-            ->field(TextField::class, 'Last Name');
-
-        $this->assertEquals('first_name', $fieldset->getFields()->first()->getName());
-    }
-
-    public function testAddField()
-    {
-        $fieldset = FieldSet::create()
-            ->addField(new Field(
-                TextField::class,
-                'First Name'
-            ));
-
+            ->field(TextField::create('First Name'))
+            ->field(TextField::create('Last Name'));
 
         $this->assertEquals('first_name', $fieldset->getFields()->first()->getName());
     }

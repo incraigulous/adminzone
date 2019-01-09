@@ -14,12 +14,10 @@ use Incraigulous\AdminZone\Elements;
 
 interface SectionInterface extends ItemInterface, ElementInterface
 {
-    public static function create(): SectionInterface;
-    public function addField(FieldInterface $type): SectionInterface;
-    public function field($type, string $name, string $label = null): SectionInterface;
+    public static function create(string $label = null): SectionInterface;
+    public function field(FieldInterface $type): SectionInterface;
     public function getFields(): Elements;
-    public function section($sectionClassName, $label = null): SectionInterface;
-    public function addSection(SectionInterface &$section): SectionInterface;
+    public function section(SectionInterface $section): SectionInterface;
     public function getSections(): Elements;
     public function addElement(ElementInterface $item): SectionInterface;
     public function getElements(): Elements;

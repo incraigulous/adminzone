@@ -13,7 +13,7 @@ abstract class Item implements ItemInterface
 {
     public function view(): string
     {
-        return $this->typePlural() . '.' . $this->slug();
+        return 'adminzone::' . $this->typePlural() . '.' . $this->slug();
     }
 
     public function typePlural(): string
@@ -55,5 +55,10 @@ abstract class Item implements ItemInterface
     public function toJson($options = 0): string
     {
         return json_encode($this->toArray(), $options);
+    }
+
+    public function toObject()
+    {
+        return objection($this->toArray());
     }
 }

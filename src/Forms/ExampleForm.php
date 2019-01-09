@@ -4,7 +4,7 @@ namespace Incraigulous\AdminZone\Forms;
 
 
 use Incraigulous\AdminZone\Contracts\SectionInterface;
-use Incraigulous\AdminZone\Fields\Types\TextField;
+use Incraigulous\AdminZone\Fields\TextField;
 use Incraigulous\AdminZone\Sections\FieldSet;
 use Incraigulous\AdminZone\Sections\Section;
 
@@ -21,15 +21,15 @@ class ExampleForm extends Form
 
     protected function main(SectionInterface $main): SectionInterface
     {
-        $main->field(TextField::class, 'First Name')
-             ->field(TextField::class, 'Last Name');
+        $main->field(TextField::create( 'First Name'))
+             ->field(TextField::create( 'Last Name'));
 
-        $location = Section::create(FieldSet::class, 'Location')
-            ->section(FieldSet::class, 'Address')
-            ->field(TextField::class, 'Address 1')
-            ->field(TextField::class, 'Address 2');
+        $location = FieldSet::create('Location')
+            ->section(FieldSet::create('Address'))
+            ->field(TextField::create('Address 1'))
+            ->field(TextField::create('Address 2'));
 
-        $main->addSection($location);
+        $main->section($location);
 
         return $main;
     }

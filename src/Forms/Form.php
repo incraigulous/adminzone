@@ -9,12 +9,13 @@ use Incraigulous\AdminZone\Contracts\SectionInterface;
 use Incraigulous\AdminZone\Contracts\SubmissionInterface;
 use Incraigulous\AdminZone\Fields\Fields;
 use Incraigulous\AdminZone\Item;
+use Incraigulous\AdminZone\MenuItems\MenuItem;
 use Incraigulous\AdminZone\Sections\Main;
 use Incraigulous\AdminZone\Submissions\ModelSubmission;
 use Incraigulous\AdminZone\Submissions\Submission;
 use Incraigulous\AdminZone\Traits\ConvertsArrayToJson;
 use Incraigulous\AdminZone\Traits\HasComponent;
-use Incraigulous\AdminZone\Traits\HasFields;
+use Incraigulous\AdminZone\Traits\HasElements;
 use Incraigulous\AdminZone\Traits\HasLabel;
 use Incraigulous\AdminZone\Traits\HasSections;
 use Incraigulous\AdminZone\Traits\HasType;
@@ -23,7 +24,7 @@ use JeffOchoa\ValidatorFactory;
 /**
  * Class Form
  */
-abstract class Form extends Item implements FormInterface
+abstract class Form extends MenuItem implements FormInterface
 {
     abstract protected function main(SectionInterface $body): SectionInterface;
 

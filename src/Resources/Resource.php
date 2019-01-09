@@ -8,13 +8,14 @@ use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 use Incraigulous\AdminZone\Contracts\ResourceInterface;
 use Incraigulous\AdminZone\Contracts\FormInterface;
 use Incraigulous\AdminZone\Exceptions\ResourceException;
+use Incraigulous\AdminZone\MenuItems\MenuItem;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
 use Incraigulous\AdminZone\Item;
 
 /**
  * Class Resource
  */
-abstract class Resource extends Item implements ResourceInterface
+abstract class Resource extends MenuItem implements ResourceInterface
 {
     public function type(): string
     {
@@ -74,12 +75,20 @@ abstract class Resource extends Item implements ResourceInterface
             'create' => $this->create(),
             'filters' => objection($this->filters())->toArray(),
             'columns' => $this->columns(),
-            'lenses' => objection($this->lenses())->toArray()
+            'lenses' => objection($this->lenses())->toArray(),
+            'menu' => object($this->menu())->toArray()
         ];
     }
 
     public function filters(): array
     {
         return [];
+    }
+
+    public function menu(): array {
+        return [
+            'All ' . $this->collectionLabel() => $this,
+            'New' . $this->label() => $this->create()
+        ];
     }
 }

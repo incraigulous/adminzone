@@ -7,7 +7,7 @@ namespace Incraigulous\AdminZone\Tests;
 
 use Illuminate\Http\Request;
 use Incraigulous\AdminZone\Fields\Fields;
-use Incraigulous\AdminZone\Fields\Types\TextField;
+use Incraigulous\AdminZone\Fields\TextField;
 use Incraigulous\AdminZone\Elements;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
 use Incraigulous\AdminZone\Submissions\CallbackSubmission;

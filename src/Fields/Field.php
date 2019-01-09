@@ -17,11 +17,10 @@ use Incraigulous\AdminZone\Traits\HasType;
 /**
  * Class Field
  */
-class Field extends Element implements FieldInterface
+abstract class Field extends Element implements FieldInterface
 {
     public $name;
     public $type = 'field';
-    public $fieldType = null;
     public $default;
     public $beforeSave;
     public $label;
@@ -35,17 +34,8 @@ class Field extends Element implements FieldInterface
      *
      * @throws FieldTypeException
      */
-    public function __construct($fieldType, string $label, string $name = null)
+    public function __construct(string $label, string $name = null)
     {
-        if (is_string($fieldType)) {
-            $fieldType = new $fieldType;
-        }
-
-        if (!$fieldType instanceof FieldTypeInterface) {
-            throw new FieldTypeException("Type must be instance of " . FieldTypeInterface::class . '.');
-        }
-
-        $this->fieldType = $fieldType;
         $this->label = $label;
         $this->name = $name ? $name : snake_case($label);
     }
@@ -60,9 +50,9 @@ class Field extends Element implements FieldInterface
         return $this->label;
     }
 
-    public static function create($type, string $label, string $name = null): Field
+    public static function create(string $label, string $name = null): Field
     {
-        return new static($type, $label, $name);
+        return new static($label, $name);
     }
 
     public function default($value): FieldInterface
@@ -90,15 +80,9 @@ class Field extends Element implements FieldInterface
     protected function asArray(): array
     {
         return [
-            'fieldType' => $this->getFieldType()->toArray(),
             'name' => $this->getName(),
             'default' => $this->getDefault()
         ];
-    }
-
-    public function getFieldType(): FieldTypeInterface
-    {
-        return $this->fieldType;
     }
 
     public function getName(): string
