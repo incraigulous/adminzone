@@ -21,4 +21,5 @@ interface RepositoryInterface
     public function delete($id);
     public function update($id, Request $request);
     public function create(Request $request);
+    public function setFilters(array $filters);
 }

@@ -11,7 +11,7 @@ use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 /**
  * Class Resolver
  */
-class ModelRepository implements RepositoryInterface
+class ModelRepository extends Repository implements RepositoryInterface
 {
     public $model;
 
@@ -32,12 +32,24 @@ class ModelRepository implements RepositoryInterface
 
     public function all(): Collection
     {
-        return $this->model->all();
+        if (!$this->hasFilters()) {
+            return $this->model->all();
+        }
+
+        return $this->filterQuery(
+            $this->model->newQuery()
+        )->get();
     }
 
     public function paginated($perPage = 15): Paginator
     {
-        return $this->model->paginated($perPage);
+        if (!$this->hasFilters()) {
+            return $this->model->paginated($perPage);
+        }
+
+        return $this->filterQuery(
+            $this->model->newQuery()
+        )->paginated($perPage);
     }
 
     public function delete($id)

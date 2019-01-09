@@ -13,7 +13,9 @@
         "ext-json": "*",
         "illuminate/support": "^5.7",
         "fzaninotto/faker": "^1.8",
-        "jeffochoa/validator-factory": "^1.0"
+        "jeffochoa/validator-factory": "^1.0",
+        "incraigulous/objection": "^1.0",
+        "bentools/querystring": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -30,7 +32,8 @@
         "incraigulous/data-factories": "^1.0",
         "orchestra/testbench": "^3.7",
         "helmich/phpunit-json-assert": "^2.0",
-        "rappasoft/laravel-helpers": "^1.0"
+        "rappasoft/laravel-helpers": "^1.0",
+        "mockery/mockery": "^1.2"
     },
     "extra": {
         "laravel": {

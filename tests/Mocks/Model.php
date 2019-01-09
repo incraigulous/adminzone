@@ -47,4 +47,14 @@ class Model extends Base
         $this->exists = false;
         $this->wasRecentlyCreated = false;
     }
+
+    public function where()
+    {
+        return $this;
+    }
+
+    public function newQuery()
+    {
+        return $this;
+    }
 }

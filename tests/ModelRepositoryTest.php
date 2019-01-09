@@ -8,6 +8,7 @@ namespace Incraigulous\AdminZone\Tests;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use Incraigulous\AdminZone\Filters\ExampleModelFilter;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
 use Incraigulous\AdminZone\Tests\Mocks\Model;
 use PHPUnit\Framework\TestCase;
@@ -48,10 +49,5 @@ class ModelRepositoryTest extends TestCase
         $repository = new ModelRepository(new Model());
         $collection = $repository->paginated();
         $this->assertInstanceOf(Paginator::class, $collection);
-    }
-
-    public function testCreate()
-    {
-
     }
 }

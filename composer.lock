@@ -4,8 +4,69 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f47662a0a6471afd9ed08e6e561e424",
+    "content-hash": "14c5859045cc19f385a411e146c87e5f",
     "packages": [
+        {
+            "name": "bentools/querystring",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bpolaszek/querystring.git",
+                "reference": "bcfef7ff2a16961fe2966af9e3f30b2bb675b8e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bpolaszek/querystring/zipball/bcfef7ff2a16961fe2966af9e3f30b2bb675b8e0",
+                "reference": "bcfef7ff2a16961fe2966af9e3f30b2bb675b8e0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "league/uri": "^5.0",
+                "phpunit/phpunit": "@stable",
+                "satooshi/php-coveralls": "@stable",
+                "squizlabs/php_codesniffer": "@stable",
+                "symfony/var-dumper": "^3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BenTools\\QueryString\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Beno!t POLASZEK",
+                    "email": "bpolaszek@gmail.com",
+                    "homepage": "http://www.polaszek.fr",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Query String manipulation library. PHP 7.1+. No dependency, immutable, PSR-7 compliant.",
+            "keywords": [
+                "psr-7",
+                "psr7",
+                "query string",
+                "querystring",
+                "uri",
+                "url"
+            ],
+            "time": "2017-11-15T16:50:50+00:00"
+        },
         {
             "name": "doctrine/inflector",
             "version": "v1.3.0",
@@ -328,6 +389,49 @@
                 "fixtures"
             ],
             "time": "2018-07-12T10:23:15+00:00"
+        },
+        {
+            "name": "incraigulous/objection",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/incraigulous/objection.git",
+                "reference": "9062f0da80ad3dec7ae2f5ceb8fef7086ac49b27"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/incraigulous/objection/zipball/9062f0da80ad3dec7ae2f5ceb8fef7086ac49b27",
+                "reference": "9062f0da80ad3dec7ae2f5ceb8fef7086ac49b27",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "^1.8",
+                "schulzefelix/laravel-data-transfer-object": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Incraigulous\\Objection\\": "src/"
+                },
+                "files": [
+                    "./src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "incraigulous",
+                    "email": "me@craigwan.com"
+                }
+            ],
+            "description": "Wrap nested arrays in DTO objects and collections.",
+            "time": "2019-01-09T15:25:45+00:00"
         },
         {
             "name": "jeffochoa/validator-factory",
@@ -1064,6 +1168,61 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "schulzefelix/laravel-data-transfer-object",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schulzefelix/laravel-data-transfer-object.git",
+                "reference": "ae79da9bee8ffaea4721dcebf7369bdac6152a0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schulzefelix/laravel-data-transfer-object/zipball/ae79da9bee8ffaea4721dcebf7369bdac6152a0d",
+                "reference": "ae79da9bee8ffaea4721dcebf7369bdac6152a0d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1",
+                "nesbot/carbon": "^1.21",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SchulzeFelix\\DataTransferObject\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Felix Schulze",
+                    "email": "githubissues@schulze.co",
+                    "homepage": "https://schulze.co",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data Transfer Objects with Attribute Casting and Date Mutators.",
+            "homepage": "https://github.com/schulzefelix/laravel-data-transfer-object",
+            "keywords": [
+                "Data Transfer Object",
+                "accessors",
+                "attribute casting",
+                "dto",
+                "felix",
+                "laravel-data-transfer-object",
+                "mutators",
+                "schulzefelix",
+                "serialization"
+            ],
+            "time": "2016-11-29T20:58:12+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

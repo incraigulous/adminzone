@@ -14,6 +14,11 @@ abstract class Filter extends Item implements FilterInterface
     public $options;
     public $label;
 
+    public function options(): array
+    {
+        return [];
+    }
+
     public function type(): string
     {
        return 'filter';
