@@ -12,5 +12,5 @@ use Illuminate\Contracts\Support\Arrayable;
 
 interface SingleInterface extends MenuItemInterface
 {
-    public function data(RepositoryInterface $repository): Arrayable;
+    public function data(): Arrayable;
 }

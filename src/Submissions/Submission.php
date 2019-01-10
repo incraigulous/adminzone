@@ -21,7 +21,7 @@ class Submission implements SubmissionInterface
      * @throws SubmissionException
      * @throws \Throwable
      */
-    public function submit(Elements $fields, Request $request, RepositoryInterface $repository)
+    public function submit(Request $request, RepositoryInterface $repository)
     {
         $input = $request->input;
 

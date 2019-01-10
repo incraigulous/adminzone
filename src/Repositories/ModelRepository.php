@@ -57,16 +57,16 @@ class ModelRepository extends Repository implements RepositoryInterface
         return $this->find($id)->delete();
     }
 
-    public function update($id, Request $request)
+    public function update($id, array $input)
     {
         $model = $this->find($id);
-        $model->fill($request->input);
+        $model->fill($input);
         return $model->save();
     }
 
-    public function create(Request $request)
+    public function create(array $input)
     {
-        $model = $this->model->create($request->input);
+        $model = $this->model->create($input);
         return $model->save();
     }
 }

@@ -6,13 +6,12 @@ use Incraigulous\AdminZone\Contracts\ElementInterface;
 use Incraigulous\AdminZone\Contracts\FieldInterface;
 use Incraigulous\AdminZone\Contracts\SectionInterface;
 use Incraigulous\AdminZone\Elements;
-use Incraigulous\AdminZone\Fields\Field;
 
 trait HasElements
 {
     public $elements;
 
-    public function field(FieldInterface $field): SectionInterface
+    public function field(FieldInterface $field): \Incraigulous\AdminZone\Contracts\HasElements
     {
         return $this->addElement($field);
     }
@@ -22,7 +21,7 @@ trait HasElements
         return $this->getElements()->getFields();
     }
 
-    public function section(SectionInterface $section): SectionInterface
+    public function section(SectionInterface $section): \Incraigulous\AdminZone\Contracts\HasElements
     {
         return $this->addElement($section);
     }
@@ -32,7 +31,7 @@ trait HasElements
         return $this->getElements()->getSections();
     }
 
-    public function addElement(ElementInterface $item): SectionInterface
+    public function addElement(ElementInterface $item): \Incraigulous\AdminZone\Contracts\HasElements
     {
         if (!$this->elements) {
             $this->elements = new Elements();

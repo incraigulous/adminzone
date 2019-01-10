@@ -13,5 +13,5 @@ use Incraigulous\AdminZone\Elements;
 
 interface SubmissionInterface
 {
-    public function submit(Elements $items, Request $request, RepositoryInterface $repository);
+    public function submit(Request $request, RepositoryInterface $repository);
 }

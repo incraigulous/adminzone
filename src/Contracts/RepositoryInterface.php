@@ -19,7 +19,7 @@ interface RepositoryInterface
     public function find($id);
     public function paginated($perPage = 15): Paginator;
     public function delete($id);
-    public function update($id, Request $request);
-    public function create(Request $request);
+    public function update($id, array $input);
+    public function create(array $input);
     public function setFilters(array $filters);
 }

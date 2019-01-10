@@ -25,7 +25,7 @@ class ModelRepositoryTest extends TestCase
     public function testUpdate()
     {
         $repository = new ModelRepository(new Model());
-        $repository->update(3, new Request(['input' => []]));
+        $repository->update(3, []);
         $model = $repository->getModel();
         $this->assertTrue($model->wasRecentlyCreated);
     }

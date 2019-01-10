@@ -19,27 +19,11 @@ class CallbackSubmissionTest extends TestCase
     public function testSubmit()
     {
         $request = new Request();
-        $fields = new Elements([
-            new TextField('First Name'),
-            new TextField('Last Name'),
-        ]);
         $repository = new ModelRepository(new Model);
-        $submission = new CallbackSubmission(function($f, $r, $repo) use ($fields, $request) {
-            $this->assertEquals($fields, $f);
+        $submission = new CallbackSubmission(function($r, $repo) use ($request, $repository) {
             $this->assertEquals($request, $r);
             $this->assertEquals($repo, $repo);
         });
-        $submission->submit($fields, $request, $repository);
-    }
-
-    public function testIsValid()
-    {
-
-    }
-
-    public function test__construct()
-    {
-        $submission = new CallbackSubmission($this->callback);
-        $this->assertEquals($this->callback, $submission->callback);
+        $submission->submit($request, $repository);
     }
 }

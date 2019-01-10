@@ -2,13 +2,12 @@
 
 namespace Incraigulous\AdminZone\Fields;
 
-use Incraigulous\AdminZone\Contracts\SectionInterface;
 use Incraigulous\AdminZone\Traits\HasElements;
-
+use Incraigulous\AdminZone\Contracts\HasElements as HasElementsInterface;
 /**
  * Class JsonField
  */
-class JsonField extends Field implements SectionInterface
+class JsonField extends Field implements HasElementsInterface
 {
     use HasElements;
 
