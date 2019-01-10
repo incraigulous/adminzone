@@ -2,7 +2,7 @@
 namespace Incraigulous\AdminZone;
 
 use Incraigulous\AdminZone\Contracts\MenuItemInterface;
-
+use Incraigulous\Objection\ObjectionFactory;
 /**
  * Class AdminZone
  */
@@ -31,7 +31,7 @@ class AdminZone
 
     static function getItems()
     {
-        return objection(static::$items);
+        return ObjectionFactory::make(static::$items);
     }
 
     static function reset()
