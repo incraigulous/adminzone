@@ -14,8 +14,11 @@
         "illuminate/support": "^5.7",
         "fzaninotto/faker": "^1.8",
         "jeffochoa/validator-factory": "^1.0",
-        "incraigulous/objection": "^1.0",
-        "bentools/querystring": "^1.0"
+        "bentools/querystring": "^1.0",
+        "spatie/laravel-translatable": "^3.1",
+        "spatie/laravel-blade-x": "^2.1",
+        "incraigulous/objection": "1.0.1",
+        "davejamesmiller/laravel-breadcrumbs": "5.x"
     },
     "autoload": {
         "psr-4": {
@@ -39,7 +42,10 @@
         "laravel": {
             "providers": [
                 "Incraigulous\\AdminZone\\AdminZoneServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "AZ": "Incraigulous\\AdminZone\\AdminZone"
+            }
         }
     }
 }

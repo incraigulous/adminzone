@@ -1,0 +1,8 @@
+.sidebar {
+  @include border-gradient($secondary, $white);
+  border-right: solid 5px;
+  width: 300px;
+  box-shadow: 11px 11px 35px -6px rgba(0,0,0,0.1);
+  padding: $grid-gutter-width/2;
+  z-index: 1;
+}

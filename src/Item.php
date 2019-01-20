@@ -18,6 +18,9 @@ abstract class Item implements ItemInterface
 
     public function typePlural(): string
     {
+        if (!$this->type()) {
+            return null;
+        }
         return str_plural($this->type());
     }
 
@@ -27,6 +30,19 @@ abstract class Item implements ItemInterface
         return kebab_case($reflect->getShortName());
     }
 
+    public function path(): string
+    {
+        return implode('/', [
+            config('adminzone.path'),
+            $this->slug()
+        ]);
+    }
+
+    public function route(): string
+    {
+        return 'adminzone::' . $this->slug();
+    }
+
     public function label(): string
     {
         return title_case(str_replace('-', ' ', $this->slug()));
@@ -34,6 +50,9 @@ abstract class Item implements ItemInterface
 
     public function collectionLabel(): string
     {
+        if (!$this->label()) {
+            return null;
+        }
         return str_plural($this->label());
     }
 
@@ -49,6 +68,8 @@ abstract class Item implements ItemInterface
             'collectionLabel' => $this->collectionLabel(),
             'slug' => $this->slug(),
             'view' => $this->view(),
+            'path' => $this->path(),
+            'route' => $this->route()
         ], $this->asArray());
     }
 

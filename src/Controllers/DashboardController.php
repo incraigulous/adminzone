@@ -10,8 +10,6 @@ use Incraigulous\AdminZone\AdminZone;
 class DashboardController extends Controller
 {
     public function show() {
-        $menu = AdminZone::getItems();
-
-        return view ('adminzone::dashboard.show', compact('menu'));
+        return view ('adminzone::dashboard.show');
     }
 }

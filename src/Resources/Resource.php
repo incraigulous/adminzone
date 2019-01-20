@@ -35,18 +35,18 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return [];
     }
 
-    public function form(): FormInterface
+    public function form()
     {
         return null;
     }
 
-    public function create(): FormInterface
+    public function create()
     {
         return $this->form();
     }
 
 
-    public function update(): FormInterface
+    public function update()
     {
         return $this->form();
     }
@@ -76,7 +76,7 @@ abstract class Resource extends MenuItem implements ResourceInterface
             'filters' => objection($this->filters())->toArray(),
             'columns' => $this->columns(),
             'lenses' => objection($this->lenses())->toArray(),
-            'menu' => object($this->menu())->toArray()
+            'menu' => objection($this->menu())->toArray()
         ];
     }
 
@@ -87,7 +87,7 @@ abstract class Resource extends MenuItem implements ResourceInterface
 
     public function menu(): array {
         return [
-            'All ' . $this->collectionLabel() => $this,
+            'All ' . $this->collectionLabel() => $this->slug(),
             'New' . $this->label() => $this->create()
         ];
     }

@@ -1,0 +1,12 @@
+.top-bar {
+  margin-bottom: $grid-gutter-width/2;
+  padding: 0px;
+
+  .nav-item,
+  .form-control,
+  .btn {
+    padding: $navbar-padding-y*2 $navbar-padding-x;
+    border-radius: 0;
+    height: auto;
+  }
+}

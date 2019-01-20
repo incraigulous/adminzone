@@ -5,7 +5,7 @@ namespace Incraigulous\AdminZone\Singles;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
-use Incraigulous\AdminZone\Tests\Mocks\Model;
+use Incraigulous\AdminZone\MockModel;
 
 /**
  * Class ExampleSingle
@@ -16,7 +16,7 @@ class ExampleSingle extends Single
 
     public function data(): Arrayable
     {
-        $repository = new ModelRepository(new Model());
+        $repository = new ModelRepository(new MockModel());
         return objection(['content' => $repository->all()]);
     }
 

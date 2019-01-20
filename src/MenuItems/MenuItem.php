@@ -11,9 +11,4 @@ class MenuItem extends Item implements MenuItemInterface
     {
         return 'menu-item';
     }
-
-    public function route()
-    {
-        return '/' . config('adminzone.path') . '/' .  $this->slug();
-    }
 }

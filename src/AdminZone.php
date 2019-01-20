@@ -31,11 +31,21 @@ class AdminZone
 
     static function getItems()
     {
-        return ObjectionFactory::make(static::$items);
+        return objection(static::$items);
+    }
+
+    static function toObject()
+    {
+        return objection(static::getItems()->toArray());
     }
 
     static function reset()
     {
         static::$items = [];
+    }
+
+    static function helpers()
+    {
+        return new Helpers();
     }
 }

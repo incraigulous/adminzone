@@ -18,5 +18,7 @@ interface ItemInterface extends Arrayable, Jsonable, Objectable
     public function type(): string;
     public function typePlural(): string;
     public function label(): string;
+    public function route(): string;
+    public function path(): string;
     public function collectionLabel(): string;
 }

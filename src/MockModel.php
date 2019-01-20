@@ -1,16 +1,16 @@
 <?php
 
-namespace Incraigulous\AdminZone\Tests\Mocks;
+namespace Incraigulous\AdminZone;
 
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as Base;
 use Illuminate\Pagination\Paginator;
 
-class Model extends Base
+class MockModel extends Base
 {
     public function find($id) {
-        return new Model();
+        return new MockModel();
     }
 
     public static function all($columns = []) {

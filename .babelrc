@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": ["last 4 versions", "ie 11"]
+      },
+      "useBuiltIns": "entry"
+    }]
+  ],
+  "plugins": ["transform-object-rest-spread", "transform-class-properties", "syntax-dynamic-import"]
+}

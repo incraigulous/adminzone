@@ -1,0 +1,19 @@
+@mixin gradient($from, $to, $direction: 0deg)
+{
+  background-image: linear-gradient($direction, $from, $to);
+}
+
+@mixin text-gradient($from, $to, $direction: 0deg)
+{
+  background: -webkit-linear-gradient($direction, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin border-gradient($from, $to, $direction: 0deg)
+{
+  border-image: linear-gradient($direction, $from, $to);
+  border-image-slice: 1;
+  box-sizing: border-box;
+  background: transparent;
+}
