@@ -5,6 +5,7 @@ namespace Incraigulous\AdminZone;
 
 use Incraigulous\AdminZone\Contracts\ItemInterface;
 use Incraigulous\AdminZone\Traits\ConvertsArrayToJson;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class Item
@@ -33,7 +34,7 @@ abstract class Item implements ItemInterface
     public function path(): string
     {
         return implode('/', [
-            config('adminzone.path'),
+            Config::get('adminzone.path'),
             $this->slug()
         ]);
     }

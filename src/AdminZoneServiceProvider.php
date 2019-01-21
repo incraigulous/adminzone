@@ -10,6 +10,7 @@ use Incraigulous\AdminZone\ViewComposers\LayoutComposer;
 use Spatie\BladeX\ComponentDirectory\NamespacedDirectory;
 use Spatie\BladeX\Facades\BladeX;
 use SplFileInfo;
+use Illuminate\Support\Facades\Config;
 
 class AdminZoneServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,8 @@ class AdminZoneServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
 
+        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+
         $this->registerBladeXComponents();
         $this->registerViewComposers();
     }
@@ -45,7 +48,7 @@ class AdminZoneServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/adminzone.php', 'adminzone');
 
-        AdminZone::register(config('adminzone.menu'));
+        AdminZone::register(Config::get('adminzone.menu'));
     }
 
     public function registerBladeXComponents()

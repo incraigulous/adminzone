@@ -4,7 +4,6 @@ namespace Incraigulous\AdminZone\Repositories;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 

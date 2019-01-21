@@ -6,6 +6,7 @@ use Faker\Generator;
 use Incraigulous\AdminZone\AdminZoneServiceProvider;
 use Orchestra\Testbench\TestCase as Base;
 use Helmich\JsonAssert\JsonAssertions;
+use Spatie\BladeX\BladeXServiceProvider;
 
 /**
  * Class TestCase
@@ -23,53 +24,39 @@ class TestCase extends Base
     protected function getPackageAliases($app)
     {
         return [
-            'App' => Illuminate\Support\Facades\App::class,
-            'Artisan' => Illuminate\Support\Facades\Artisan::class,
-            'Auth' => Illuminate\Support\Facades\Auth::class,
-            'Blade' => Illuminate\Support\Facades\Blade::class,
-            'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
-            'Bus' => Illuminate\Support\Facades\Bus::class,
-            'Cache' => Illuminate\Support\Facades\Cache::class,
-            'Config' => Illuminate\Support\Facades\Config::class,
-            'Cookie' => Illuminate\Support\Facades\Cookie::class,
-            'Crypt' => Illuminate\Support\Facades\Crypt::class,
-            'DB' => Illuminate\Support\Facades\DB::class,
-            'Eloquent' => Illuminate\Database\Eloquent\Model::class,
-            'Event' => Illuminate\Support\Facades\Event::class,
-            'File' => Illuminate\Support\Facades\File::class,
-            'Gate' => Illuminate\Support\Facades\Gate::class,
-            'Hash' => Illuminate\Support\Facades\Hash::class,
-            'Lang' => Illuminate\Support\Facades\Lang::class,
-            'Log' => Illuminate\Support\Facades\Log::class,
-            'Mail' => Illuminate\Support\Facades\Mail::class,
-            'Notification' => Illuminate\Support\Facades\Notification::class,
-            'Password' => Illuminate\Support\Facades\Password::class,
-            'Queue' => Illuminate\Support\Facades\Queue::class,
-            'Redirect' => Illuminate\Support\Facades\Redirect::class,
-            'Redis' => Illuminate\Support\Facades\Redis::class,
-            'Request' => Illuminate\Support\Facades\Request::class,
-            'Response' => Illuminate\Support\Facades\Response::class,
-            'Route' => Illuminate\Support\Facades\Route::class,
-            'Schema' => Illuminate\Support\Facades\Schema::class,
-            'Session' => Illuminate\Support\Facades\Session::class,
-            'Storage' => Illuminate\Support\Facades\Storage::class,
-            'URL' => Illuminate\Support\Facades\URL::class,
-            'Validator' => Illuminate\Support\Facades\Validator::class,
-            'View' => Illuminate\Support\Facades\View::class,
+            'config' => 'Illuminate\Config\Repository'
         ];
     }
 
     protected function getPackageProviders($app)
     {
-        return [AdminZoneServiceProvider::class];
+        return [
+            AdminZoneServiceProvider::class,
+            BladeXServiceProvider::class
+        ];
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        // Setup default database to use sqlite :memory:
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.connections.testing', [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ]);
     }
 
     protected function setUp()
     {
+        parent::setUp();
         foreach (glob(__DIR__.'/factories/*.php') as $filename)
         {
             require_once $filename;
         }
+        $this->loadLaravelMigrations(['--database' =>  'testing']);
+        $this->artisan('migrate', ['--database' => 'testing'])->run();
+
         $this->faker = \Faker\Factory::create();
         $this->callback = function($param = false) {
             $this->assertTrue($param);

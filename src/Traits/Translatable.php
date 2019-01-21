@@ -3,6 +3,7 @@
 namespace Incraigulous\AdminZone\Traits;
 
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Support\Facades\Config;
 
 trait Translatable
 {
@@ -12,6 +13,6 @@ trait Translatable
     {
         return is_array($this->translatable)
         ? $this->translatable
-        : config('adminzone.translations');
+        : Config::get('adminzone.translations');
     }
 }
