@@ -38,7 +38,7 @@ class AdminZoneServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
 
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->registerBladeXComponents();
         $this->registerViewComposers();

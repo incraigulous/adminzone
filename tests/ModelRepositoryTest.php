@@ -6,10 +6,11 @@
 namespace Incraigulous\AdminZone\Tests;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Filters\ExampleModelFilter;
-use Illuminate\Foundation\Auth\User;
+use Incraigulous\AdminZone\Models\User;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
 
 class ModelRepositoryTest extends TestCase
@@ -23,10 +24,10 @@ class ModelRepositoryTest extends TestCase
 
     public function testUpdate()
     {
+        $name = $this->faker->name;
         $repository = new ModelRepository(new User());
-        $repository->update(3, []);
-        $model = $repository->getModel();
-        $this->assertTrue($model->wasRecentlyCreated);
+        $user = $repository->update(1, ['name' => $name]);
+        $this->assertEquals($user->name, $name);
     }
 
     public function testFind()
@@ -46,7 +47,7 @@ class ModelRepositoryTest extends TestCase
     public function testPaginated()
     {
         $repository = new ModelRepository(new User());
-        $collection = $repository->paginated();
-        $this->assertInstanceOf(Paginator::class, $collection);
+        $collection = $repository->paginate();
+        $this->assertInstanceOf(LengthAwarePaginator::class, $collection);
     }
 }

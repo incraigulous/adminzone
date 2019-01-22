@@ -18,7 +18,7 @@ class CreateRevisionsTable extends Migration
             $table->string('revisionable_type');
             $table->integer('revisionable_id');
             $table->integer('user_id')->nullable();
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->json('data');
             $table->index(array('revisionable_id', 'revisionable_type'));
             $table->timestamps();

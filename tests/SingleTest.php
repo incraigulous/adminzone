@@ -5,7 +5,6 @@
 namespace Incraigulous\AdminZone\Tests;
 use Incraigulous\AdminZone\Singles\ExampleSingle;
 use Incraigulous\Objection\Collection;
-use PHPUnit\Framework\TestCase;
 
 class SingleTest extends TestCase
 {

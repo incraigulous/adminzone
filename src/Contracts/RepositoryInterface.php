@@ -8,16 +8,14 @@
 namespace Incraigulous\AdminZone\Contracts;
 
 
-use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 interface RepositoryInterface
 {
     public function all(): Collection;
     public function find($id);
-    public function paginated($perPage = 15): Paginator;
+    public function paginate($perPage = 15): LengthAwarePaginator;
     public function delete($id);
     public function update($id, array $input);
     public function create(array $input);

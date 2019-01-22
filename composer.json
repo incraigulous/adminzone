@@ -22,7 +22,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Incraigulous\\AdminZone\\": "src/"
+            "Incraigulous\\AdminZone\\": "src/",
+            "Incraigulous\\AdminZone\\Seeders\\": "database/seeders"
         }
     },
     "autoload-dev": {

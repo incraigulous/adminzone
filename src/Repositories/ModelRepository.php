@@ -2,6 +2,7 @@
 
 namespace Incraigulous\AdminZone\Repositories;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -40,10 +41,10 @@ class ModelRepository extends Repository implements RepositoryInterface
         )->get();
     }
 
-    public function paginated($perPage = 15): Paginator
+    public function paginate($perPage = 15): LengthAwarePaginator
     {
         if (!$this->hasFilters()) {
-            return $this->model->paginated($perPage);
+            return $this->model->paginate($perPage);
         }
 
         return $this->filterQuery(
@@ -60,7 +61,8 @@ class ModelRepository extends Repository implements RepositoryInterface
     {
         $model = $this->find($id);
         $model->fill($input);
-        return $model->save();
+        $model->save();
+        return $model;
     }
 
     public function create(array $input)

@@ -17,7 +17,7 @@ class RegisterTest extends TestCase
         AdminZone::register(ExampleResource::class);
         AdminZone::register(ExampleSingle::class);
         AdminZone::register(MenuItem::class);
-        $this->assertEquals(AdminZone::getItems()->count(), 3);
+        $this->assertEquals(3, AdminZone::getItems()->count());
         AdminZone::getItems()->each(function($item) {
             $this->assertInstanceOf(MenuItem::class, $item);
         });
