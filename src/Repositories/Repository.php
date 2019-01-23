@@ -3,12 +3,20 @@
 namespace Incraigulous\AdminZone\Repositories;
 
 
+use Illuminate\Support\Collection;
+use Incraigulous\AdminZone\Contracts\RepositoryInterface;
+
 /**
  * Class RepositoryBase
  */
-class Repository
+abstract class Repository
 {
     public $filters = [];
+
+    public function revisions($id): Collection
+    {
+        return objection([]);
+    }
 
     public function setFilters(array $filters)
     {
@@ -29,5 +37,15 @@ class Repository
         }
 
         return $query;
+    }
+
+    public function isRevisionable(): bool
+    {
+        return false;
+    }
+
+    public function isTranslatable(): bool
+    {
+        return false;
     }
 }

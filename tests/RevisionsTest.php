@@ -5,6 +5,7 @@ namespace Incraigulous\AdminZone\Tests;
 
 use Incraigulous\AdminZone\Models\Revision;
 use Incraigulous\AdminZone\Models\User;
+use Incraigulous\AdminZone\Repositories\ModelRepository;
 
 /**
  * Class RevisionsTest
@@ -48,5 +49,16 @@ class RevisionsTest extends TestCase
         $user->revisions()->first()->restore();
         $user = $user->find($user->id);
         $this->assertEquals($name, $user->name);
+    }
+
+    public function testRepositoriesRetrieveRevisions()
+    {
+        $name = $this->faker->name;
+        $user = factory(User::class)->create();
+        $repository = new ModelRepository($user);
+        $this->assertTrue($repository->isRevisionable());
+        $repository->update($user->id, array_merge($user->toArray(), ['name' => $name]));
+        $revisedName = $user->revisions()->first()->data->name;
+        $this->assertEquals($revisedName, $repository->revisions($user->id)->first()->data->name);
     }
 }

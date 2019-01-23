@@ -20,4 +20,7 @@ interface RepositoryInterface
     public function update($id, array $input);
     public function create(array $input);
     public function setFilters(array $filters);
+    public function isRevisionable(): bool;
+    public function revisions($id): Collection;
+    public function isTranslatable(): bool;
 }

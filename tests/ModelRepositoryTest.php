@@ -10,6 +10,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Filters\ExampleModelFilter;
+use Incraigulous\AdminZone\Models\Model;
+use Incraigulous\AdminZone\Models\TranslatableUser;
 use Incraigulous\AdminZone\Models\User;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
 
@@ -49,5 +51,15 @@ class ModelRepositoryTest extends TestCase
         $repository = new ModelRepository(new User());
         $collection = $repository->paginate();
         $this->assertInstanceOf(LengthAwarePaginator::class, $collection);
+    }
+
+    public function testIsTranslatable()
+    {
+        $user = factory(User::class)->create();
+        $translatableUser = new TranslatableUser();
+        $repository = new ModelRepository($user);
+        $translatableRepository = new ModelRepository($translatableUser);
+        $this->assertFalse($repository->isTranslatable());
+        $this->assertTrue($translatableRepository->isTranslatable());
     }
 }

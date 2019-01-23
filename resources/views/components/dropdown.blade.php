@@ -18,7 +18,7 @@ $menuAttributes = $menuAttributes ?? [
     ];
 ?>
 <div {!! AZ::helpers()->toHtmlAttributes($attributes) !!} data-controller="dropdown">
-    <div @if($icon) class="dropdown-toggle" @endif data-action="click->dropdown#toggle">
+    <div data-action="click->dropdown#toggle">
         {{ $slot }}
     </div>
     <div {!! AZ::helpers()->toHtmlAttributes($menuAttributes) !!} data-target="dropdown.menu">

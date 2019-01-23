@@ -7,6 +7,9 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Contracts\RepositoryInterface;
+use Incraigulous\AdminZone\Models\Contracts\Revisionable;
+use phpDocumentor\Reflection\Types\Parent_;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Class Resolver
@@ -69,5 +72,24 @@ class ModelRepository extends Repository implements RepositoryInterface
     {
         $model = $this->model->create($input);
         return $model->save();
+    }
+
+    public function isRevisionable(): bool
+    {
+        return $this->model instanceof Revisionable;
+    }
+
+    public function revisions($id): Collection
+    {
+        if (!$this->isRevisionable()) {
+            return parent::revisions();
+        }
+
+        return $this->find($id)->revisions()->get();
+    }
+
+    public function isTranslatable(): bool
+    {
+        return array_key_exists(HasTranslations::class, class_uses($this->model));
     }
 }

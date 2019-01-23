@@ -51,11 +51,11 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return $this->form();
     }
 
-    protected function model(): Model {
+    protected function model() {
         return null;
     }
 
-    protected function repository(): RepositoryInterface
+    protected function repository()
     {
         if ($this->model()) {
             return new ModelRepository($this->model());
@@ -76,7 +76,9 @@ abstract class Resource extends MenuItem implements ResourceInterface
             'filters' => objection($this->filters())->toArray(),
             'columns' => $this->columns(),
             'lenses' => objection($this->lenses())->toArray(),
-            'menu' => objection($this->menu())->toArray()
+            'menu' => objection($this->menu())->toArray(),
+            'isRevisionable' => ($this->repository()) ? $this->repository()->isRevisionable() : false,
+            'isTranslatable' => ($this->repository()) ? $this->repository()->isTranslatable() : false
         ];
     }
 

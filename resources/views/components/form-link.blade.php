@@ -9,7 +9,7 @@
 
 <form {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>
     @csrf
-    <az-button theme="link" size="sm" type="submit">
+    <az-button theme="link" type="submit" class="m-0 p-0">
         {{ $slot }}
     </az-button>
 </form>

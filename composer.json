@@ -37,7 +37,8 @@
         "orchestra/testbench": "^3.7",
         "helmich/phpunit-json-assert": "^2.0",
         "rappasoft/laravel-helpers": "^1.0",
-        "mockery/mockery": "^1.2"
+        "mockery/mockery": "^1.2",
+        "orchestra/testbench-browser-kit": "^3.7"
     },
     "extra": {
         "laravel": {
