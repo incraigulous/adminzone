@@ -3,18 +3,21 @@
 namespace Incraigulous\AdminZone\Resources;
 
 
-use Incraigulous\AdminZone\Forms\ExampleForm;
+use Incraigulous\AdminZone\Forms\UserForm;
 
 /**
  * Class ExampleResource
  */
-class ExampleResource extends Resource
+class User extends Resource
 {
 
     public function form() {
-        return new ExampleForm();
+        return new UserForm();
     }
 
+    public function model() {
+        return new \Incraigulous\AdminZone\Models\User();
+    }
 
     public function filters(): array
     {

@@ -9,7 +9,7 @@ use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 /**
  * Class RepositoryBase
  */
-abstract class Repository
+abstract class Repository implements RepositoryInterface
 {
     public $filters = [];
 
@@ -18,9 +18,10 @@ abstract class Repository
         return objection([]);
     }
 
-    public function setFilters(array $filters)
+    public function setFilters(array $filters): RepositoryInterface
     {
         $this->filters = $filters;
+        return $this;
     }
 
     protected function hasFilters()

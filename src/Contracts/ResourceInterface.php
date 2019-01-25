@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ResourceInterface extends MenuItemInterface
 {
-    public function getRepository(): RepositoryInterface;
+    public function getRepository();
     public function form();
     public function create();
     public function update();

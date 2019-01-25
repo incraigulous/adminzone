@@ -2,6 +2,8 @@
 namespace Incraigulous\AdminZone;
 
 use Incraigulous\AdminZone\Contracts\MenuItemInterface;
+use Incraigulous\AdminZone\Contracts\ResourceInterface;
+use Incraigulous\AdminZone\Resources\Resource;
 use Incraigulous\Objection\Collection;
 use Incraigulous\Objection\ObjectionFactory;
 /**
@@ -38,6 +40,20 @@ class AdminZone
     static function resources(): Collection
     {
         return static::getItems();
+    }
+
+    static function find($slug): Collection
+    {
+        return static::getItems()->first(function($resources) use ($slug) {
+            return $resources->slug() === $slug;
+        });
+    }
+
+    static function findResource($slug): ResourceInterface
+    {
+        return static::resources()->first(function($resources) use ($slug) {
+            return $resources->slug() === $slug;
+        });
     }
 
     static function toObject()

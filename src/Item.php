@@ -35,13 +35,14 @@ abstract class Item implements ItemInterface
     {
         return implode('/', [
             Config::get('adminzone.path'),
+            $this->typePlural(),
             $this->slug()
         ]);
     }
 
     public function route(): string
     {
-        return 'adminzone::' . $this->slug();
+        return 'adminzone::' . $this->type();
     }
 
     public function label(): string

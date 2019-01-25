@@ -8,7 +8,6 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ url('vendor/adminzone/adminzone.css') }}">
 
-        <title>{{ Breadcrumbs::current()->title }}</title>
     </head>
     
     <body>
@@ -24,9 +23,7 @@
                 @section('navbar')
                     <az-topbar :resources="$resources"></az-topbar>
                 @show
-                @section('utility-bar')
-                    <az-utility-nav></az-utility-nav>
-                @show
+                @yield('utility-nav')
                 <main>
                     @yield('main')
                 </main>

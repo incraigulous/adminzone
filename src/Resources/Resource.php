@@ -26,7 +26,8 @@ abstract class Resource extends MenuItem implements ResourceInterface
     {
         return [
             'ID' => 'id',
-            'Name' => 'name'
+            'Name' => 'name',
+            'email' => 'email'
         ];
     }
 
@@ -63,7 +64,7 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return null;
     }
 
-    public function getRepository(): RepositoryInterface
+    public function getRepository()
     {
         return $this->repository()->setFilters($this->filters());
     }
@@ -78,7 +79,8 @@ abstract class Resource extends MenuItem implements ResourceInterface
             'lenses' => objection($this->lenses())->toArray(),
             'menu' => objection($this->menu())->toArray(),
             'isRevisionable' => ($this->repository()) ? $this->repository()->isRevisionable() : false,
-            'isTranslatable' => ($this->repository()) ? $this->repository()->isTranslatable() : false
+            'isTranslatable' => ($this->repository()) ? $this->repository()->isTranslatable() : false,
+            'repository' => $this->getRepository()
         ];
     }
 

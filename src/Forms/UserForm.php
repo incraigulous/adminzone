@@ -11,7 +11,7 @@ use Incraigulous\AdminZone\Sections\Section;
 /**
  * Class ExampleForm
  */
-class ExampleForm extends Form
+class UserForm extends Form
 {
 
     public function rules(): array

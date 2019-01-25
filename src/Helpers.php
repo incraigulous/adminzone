@@ -30,6 +30,11 @@ class Helpers
         );
     }
 
+    public function attributes(array $array): string
+    {
+        return $this->toHtmlAttributes($array);
+    }
+
     public function textColorFromTheme(string $themeColor): string
     {
         switch ($themeColor) {

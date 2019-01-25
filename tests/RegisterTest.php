@@ -7,14 +7,14 @@ namespace Incraigulous\AdminZone\Tests;
 
 use Incraigulous\AdminZone\AdminZone;
 use Incraigulous\AdminZone\MenuItems\MenuItem;
-use Incraigulous\AdminZone\Resources\ExampleResource;
+use Incraigulous\AdminZone\Resources\User;
 use Incraigulous\AdminZone\Singles\ExampleSingle;
 
 class RegisterTest extends TestCase
 {
     public function testRegisterStrings()
     {
-        AdminZone::register(ExampleResource::class);
+        AdminZone::register(User::class);
         AdminZone::register(ExampleSingle::class);
         AdminZone::register(MenuItem::class);
         $this->assertEquals(3, AdminZone::getItems()->count());
@@ -26,7 +26,7 @@ class RegisterTest extends TestCase
 
     public function testRegisterClasses()
     {
-        AdminZone::register(new ExampleResource());
+        AdminZone::register(new User());
         AdminZone::register(new ExampleSingle());
         AdminZone::register(new MenuItem());
         $this->assertEquals(AdminZone::getItems()->count(), 3);
@@ -39,7 +39,7 @@ class RegisterTest extends TestCase
     public function testRegisterArray()
     {
         AdminZone::register([
-            ExampleResource::class,
+            User::class,
             ExampleSingle::class,
             MenuItem::class
         ]);
