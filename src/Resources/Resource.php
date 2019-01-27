@@ -17,7 +17,7 @@ use Incraigulous\AdminZone\Item;
  */
 abstract class Resource extends MenuItem implements ResourceInterface
 {
-    public function type(): string
+    protected function type(): string
     {
         return 'resource';
     }
@@ -26,8 +26,12 @@ abstract class Resource extends MenuItem implements ResourceInterface
     {
         return [
             'ID' => 'id',
-            'Name' => 'name',
-            'email' => 'email'
+            'Created' => function($model) {
+                return $model->created_at->format('M d Y');
+            },
+            'Updated' => function($model) {
+                return $model->updated_at->format('M d Y');
+            }
         ];
     }
 
@@ -56,15 +60,12 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return null;
     }
 
-    protected function repository()
+    public function repository(): RepositoryInterface
     {
-        if ($this->model()) {
-            return new ModelRepository($this->model());
-        }
-        return null;
+        return new ModelRepository($this->model());
     }
 
-    public function getRepository()
+    public function getRepository(): RepositoryInterface
     {
         return $this->repository()->setFilters($this->filters());
     }
@@ -72,15 +73,8 @@ abstract class Resource extends MenuItem implements ResourceInterface
     public function asArray(): array
     {
         return [
-            'update' => $this->update(),
-            'create' => $this->create(),
-            'filters' => objection($this->filters())->toArray(),
-            'columns' => $this->columns(),
-            'lenses' => objection($this->lenses())->toArray(),
-            'menu' => objection($this->menu())->toArray(),
             'isRevisionable' => ($this->repository()) ? $this->repository()->isRevisionable() : false,
-            'isTranslatable' => ($this->repository()) ? $this->repository()->isTranslatable() : false,
-            'repository' => $this->getRepository()
+            'isTranslatable' => ($this->repository()) ? $this->repository()->isTranslatable() : false
         ];
     }
 
@@ -89,10 +83,81 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return [];
     }
 
-    public function menu(): array {
+    public function actions(): array {
         return [
-            'All ' . $this->collectionLabel() => $this->slug(),
-            'New' . $this->label() => $this->create()
+            'Edit' => 'id',
+            'Delete' => function($model) {
+                return $model->created_at->format('M d Y');
+            },
+            'Updated' => function($model) {
+                return $model->updated_at->format('M d Y');
+            }
         ];
+    }
+
+    public function createRoute()
+    {
+        return $this->getRoute() . ':create';
+    }
+
+    public function editRoute()
+    {
+        return $this->getRoute() . ':edit';
+    }
+
+    public function showRoute()
+    {
+        return $this->getRoute() . ':show';
+    }
+
+
+    public function getForm(): FormInterface
+    {
+        return $this->form();
+    }
+
+    public function getCreate(): FormInterface
+    {
+        return $this->create();
+    }
+
+    public function getUpdate(): FormInterface
+    {
+        return $this->update();
+    }
+
+    public function getFilters(): array
+    {
+        return $this->filters();
+    }
+
+    public function getColumns(): array
+    {
+        return $this->columns();
+    }
+
+    public function getLenses(): array
+    {
+        return $this->lenses();
+    }
+
+    public function getActions(): array
+    {
+        return $this->actions();
+    }
+
+    public function getCreateRoute(): string
+    {
+        return $this->createRoute();
+    }
+
+    public function getEditRoute(): string
+    {
+        return $this->editRoute();
+    }
+
+    public function getShowRoute(): string
+    {
+        return $this->showRoute();
     }
 }

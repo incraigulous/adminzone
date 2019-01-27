@@ -13,12 +13,12 @@ use Illuminate\Contracts\Support\Jsonable;
 
 interface ItemInterface extends Arrayable, Jsonable, Objectable
 {
-    public function view(): string;
-    public function slug(): string;
-    public function type(): string;
-    public function typePlural(): string;
-    public function label(): string;
-    public function route(): string;
-    public function path(): string;
-    public function collectionLabel(): string;
+    public function getView(): string;
+    public function getSlug(): string;
+    public function getType(): string;
+    public function getTypePlural(): string;
+    public function getLabel(): string;
+    public function getRoute(): string;
+    public function getPath(): string;
+    public function getCollectionLabel(): string;
 }

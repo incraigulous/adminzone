@@ -9,5 +9,5 @@ if (!Breadcrumbs::exists('adminzone::dashboard')) {
 
 Breadcrumbs::for('adminzone::resource', function ($trail, $resource) {
     $trail->push('Dashboard', route('adminzone::dashboard'));
-    $trail->push($resource->collectionLabel, route('adminzone::resource', $resource->slug));
+    $trail->push($resource->getCollectionLabel(), route('adminzone::resource', $resource->getSlug()));
 });

@@ -12,7 +12,7 @@ use Incraigulous\AdminZone\Seeders\AdminZoneSeeder;
 use Orchestra\Testbench\BrowserKit\TestCase as Base;
 use Helmich\JsonAssert\JsonAssertions;
 use Spatie\BladeX\BladeXServiceProvider;
-
+use Tightenco\Ziggy\ZiggyServiceProvider;
 /**
  * Class TestCase
  */
@@ -53,7 +53,8 @@ class TestCase extends Base
         return [
             AdminZoneServiceProvider::class,
             BladeXServiceProvider::class,
-            BreadcrumbsServiceProvider::class
+            BreadcrumbsServiceProvider::class,
+            ZiggyServiceProvider::class
         ];
     }
 

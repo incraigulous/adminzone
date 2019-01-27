@@ -18,7 +18,8 @@
         "spatie/laravel-translatable": "^3.1",
         "spatie/laravel-blade-x": "^2.1",
         "incraigulous/objection": "1.0.1",
-        "davejamesmiller/laravel-breadcrumbs": "5.x"
+        "davejamesmiller/laravel-breadcrumbs": "5.x",
+        "tightenco/ziggy": "^0.6.9"
     },
     "autoload": {
         "psr-4": {

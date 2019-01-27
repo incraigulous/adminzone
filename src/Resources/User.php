@@ -11,6 +11,20 @@ use Incraigulous\AdminZone\Forms\UserForm;
 class User extends Resource
 {
 
+    public function columns(): array
+    {
+        return [
+            'ID' => 'id',
+            'Name' => 'name',
+            'email' => function ($user) {
+                return "<a href='mailto:$user->email' title='Email $user->name'>$user->email</a>";
+            },
+            'Created' => function($model) {
+                return $model->created_at->format('M d Y');
+            },
+        ];
+    }
+
     public function form() {
         return new UserForm();
     }

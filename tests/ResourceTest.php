@@ -19,7 +19,7 @@ class ResourceTest extends TestCase
             User::class
         ]);
         AdminZone::resources()->each(function($resource) {
-            $this->actingAsUser()->get($resource->path())->assertResponseOk();
+            $this->actingAsUser()->get($resource->getPath())->assertResponseOk();
         });
     }
 }

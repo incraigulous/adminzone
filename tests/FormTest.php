@@ -28,7 +28,7 @@ class FormTest extends TestCase
     public function testLabel()
     {
         $form = new UserForm();
-        $this->assertEquals('User Form', $form->label());
+        $this->assertEquals('User Form', $form->getLabel());
     }
 
     public function testToArray()

@@ -45,14 +45,14 @@ class AdminZone
     static function find($slug): Collection
     {
         return static::getItems()->first(function($resources) use ($slug) {
-            return $resources->slug() === $slug;
+            return $resources->getSlug() === $slug;
         });
     }
 
     static function findResource($slug): ResourceInterface
     {
         return static::resources()->first(function($resources) use ($slug) {
-            return $resources->slug() === $slug;
+            return $resources->getSlug() === $slug;
         });
     }
 

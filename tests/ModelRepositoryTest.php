@@ -34,9 +34,10 @@ class ModelRepositoryTest extends TestCase
 
     public function testFind()
     {
-        $repository = new ModelRepository(new User());
-        $model = $repository->find(3);
-        $this->assertInstanceOf(\Illuminate\Database\Eloquent\Model::class, $model);
+       $user = factory(User::class)->create();
+       $repository = new ModelRepository(new User());
+       $model = $repository->find($user->id);
+       $this->assertEquals($user->id, $model->id);
     }
 
     public function testAll()

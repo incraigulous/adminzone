@@ -8,14 +8,14 @@ use Incraigulous\AdminZone\AdminZone;
 /**
  * Class ResourceController
  */
-class ResourceController
+class ResourceController extends Controller
 {
-    public function show($slug) {
+    public function index($slug) {
         $resource = AdminZone::findResource($slug);
         if (!$resource) {
             return abort(404);
         }
-        $resource = $resource->toObject();
-        return view('adminzone::resources.show', compact('resource'));
+        $items = $resource->getRepository()->paginate();
+        return view('adminzone::resources.index', compact('resource', 'items'));
     }
 }

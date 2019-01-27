@@ -35,6 +35,15 @@ class Helpers
         return $this->toHtmlAttributes($array);
     }
 
+    public function callbackOr(callable $fallback, $callback, ...$params)
+    {
+        if (!is_callable($callback)) {
+            return $fallback($callback, ...$params);
+        }
+
+        return $callback(...$params);
+    }
+
     public function textColorFromTheme(string $themeColor): string
     {
         switch ($themeColor) {

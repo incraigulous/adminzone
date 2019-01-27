@@ -1,4 +1,4 @@
-<az-form class="form-inline">
+<form class="form-inline search" data-controller="search" data-action="submit->search#submit">
     <div data-controller="dropdown">
         <az-input-group>
             <slot name="before">
@@ -10,10 +10,10 @@
                     @endforeach
                 </div>
             </slot>
-            <input type="text" class="form-control" type="search" placeholder="Search" name="search" />
+            <input type="text" class="form-control" type="search" placeholder="Search" name="q" />
             <slot name="after">
-                <az-button theme="primary" type="submit" element="button">Search</az-button>
+                <az-button theme="primary" type="submit">Search</az-button>
             </slot>
         </az-input-group>
     </div>
-</az-form>
+</form>

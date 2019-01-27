@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ResourceInterface extends MenuItemInterface
 {
-    public function getRepository();
-    public function form();
-    public function create();
-    public function update();
-    public function filters(): array;
-    public function columns(): array;
-    public function lenses(): array;
-    public function menu(): array;
+    public function getRepository(): RepositoryInterface;
+    public function getForm(): FormInterface;
+    public function getCreate(): FormInterface;
+    public function getUpdate(): FormInterface;
+    public function getFilters(): array;
+    public function getColumns(): array;
+    public function getLenses(): array;
+    public function getActions(): array;
+    public function getShowRoute(): string;
+    public function getEditRoute(): string;
+    public function getCreateRoute(): string;
 }

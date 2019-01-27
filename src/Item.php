@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\Config;
  */
 abstract class Item implements ItemInterface
 {
-    public function view(): string
+    protected function view(): string
     {
         return 'adminzone::' . $this->typePlural() . '.' . $this->slug();
     }
 
-    public function typePlural(): string
+    abstract protected function type(): string;
+
+    protected function typePlural(): string
     {
         if (!$this->type()) {
             return null;
@@ -25,13 +27,13 @@ abstract class Item implements ItemInterface
         return str_plural($this->type());
     }
 
-    public function slug(): string
+    protected function slug(): string
     {
         $reflect = new \ReflectionClass($this);
         return kebab_case($reflect->getShortName());
     }
 
-    public function path(): string
+    protected function path(): string
     {
         return implode('/', [
             Config::get('adminzone.path'),
@@ -40,17 +42,17 @@ abstract class Item implements ItemInterface
         ]);
     }
 
-    public function route(): string
+    protected function route(): string
     {
         return 'adminzone::' . $this->type();
     }
 
-    public function label(): string
+    protected function label(): string
     {
         return title_case(str_replace('-', ' ', $this->slug()));
     }
 
-    public function collectionLabel(): string
+    protected function collectionLabel(): string
     {
         if (!$this->label()) {
             return null;
@@ -64,14 +66,14 @@ abstract class Item implements ItemInterface
 
     public function toArray() {
         return array_merge([
-            'type' => $this->type(),
-            'typePlural' => $this->typePlural(),
-            'label' => $this->label(),
-            'collectionLabel' => $this->collectionLabel(),
-            'slug' => $this->slug(),
-            'view' => $this->view(),
-            'path' => $this->path(),
-            'route' => $this->route()
+            'type' => $this->getType(),
+            'typePlural' => $this->getTypePlural(),
+            'label' => $this->getLabel(),
+            'collectionLabel' => $this->getCollectionLabel(),
+            'slug' => $this->getSlug(),
+            'view' => $this->getView(),
+            'path' => $this->getPath(),
+            'route' => $this->getRoute()
         ], $this->asArray());
     }
 
@@ -83,5 +85,45 @@ abstract class Item implements ItemInterface
     public function toObject()
     {
         return objection($this->toArray());
+    }
+
+    public function getView(): string
+    {
+        return $this->view();
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug();
+    }
+
+    public function getType(): string
+    {
+        return $this->type();
+    }
+
+    public function getTypePlural(): string
+    {
+        return $this->typePlural();
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label();
+    }
+
+    public function getRoute(): string
+    {
+        return $this->route();
+    }
+
+    public function getPath(): string
+    {
+        return $this->path();
+    }
+
+    public function getCollectionLabel(): string
+    {
+        return $this->collectionLabel();
     }
 }

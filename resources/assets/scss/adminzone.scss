@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/functions";
+@import "~noty/src/noty.scss";
 @import "./variables";
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/variables';
@@ -11,3 +12,5 @@
 @import "./sidebar";
 @import "./main";
 @import "./footer";
+@import "./table";
+@import "./pagination";

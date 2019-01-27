@@ -7,7 +7,7 @@ use Incraigulous\AdminZone\Item;
 
 class MenuItem extends Item implements MenuItemInterface
 {
-    public function type(): string
+    protected function type(): string
     {
         return 'menu-item';
     }

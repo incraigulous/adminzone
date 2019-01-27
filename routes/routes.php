@@ -7,6 +7,7 @@ Route::middleware(['web', config('adminzone.middleware')])
     ->group(function() {
         Route::prefix(config('adminzone.path'))->group(function() {
             Route::get('/', 'DashboardController@show')->name('adminzone::dashboard');
-            Route::get('resources/{slug}', 'ResourceController@show')->name('adminzone::resource');
+            Route::get('/search','SearchController@index')->name('adminzone::search');
+            Route::get('resources/{slug}', 'ResourceController@index')->name('adminzone::resource');
         });
     });
