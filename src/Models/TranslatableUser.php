@@ -2,10 +2,10 @@
 
 namespace Incraigulous\AdminZone\Models;
 
-use Spatie\Translatable\HasTranslations;
+use Incraigulous\AdminZone\Models\Traits\Translatable;
 
 class TranslatableUser extends User {
-    use HasTranslations;
+    use Translatable;
 
     protected $table = 'users';
 }

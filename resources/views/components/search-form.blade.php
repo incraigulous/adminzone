@@ -1,12 +1,18 @@
 <form class="form-inline search" data-controller="search" data-action="submit->search#submit">
-    <div data-controller="dropdown">
+    <div data-controller="dropdown" class="dropdown">
         <az-input-group>
             <slot name="before">
-                <az-button theme="secondary" element="button" data-action="click->dropdown#toggle">Filter</az-button>
-                <az-button theme="secondary" element="button" class="dropdown-toggle dropdown-toggle-split" data-action="click->dropdown#toggle"></az-button>
+                <az-button theme="secondary" element="a" data-action="click->dropdown#toggle" data-target="dashboard.gutter">Filter</az-button>
                 <div class="dropdown-menu" data-target="dropdown.menu">
                     @foreach($resources as $item)
-                        <az-dropdown-item>{{ $item->label }}</az-dropdown-item>
+                        <az-dropdown-item data-action="click->search#handleFilterClick">
+                            <div class="form-check justify-content-start">
+                                <input type="checkbox" name="filter[]" class="form-check-input" value="{{ $item->slug }}">
+                                <label class="form-check-label pl-2">
+                                    {{ $item->label }}
+                                </label>
+                            </div>
+                        </az-dropdown-item>
                     @endforeach
                 </div>
             </slot>
@@ -15,5 +21,6 @@
                 <az-button theme="primary" type="submit">Search</az-button>
             </slot>
         </az-input-group>
+        <div class="dropdown-backdrop" data-target="dropdown.backdrop" data-action="click->dropdown#close"></div>
     </div>
 </form>

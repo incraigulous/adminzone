@@ -2,10 +2,12 @@
 
 namespace Incraigulous\AdminZone;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Incraigulous\AdminZone\ViewComposers\FieldComposer;
+use Incraigulous\AdminZone\ViewComposers\FieldElementComposer;
 use Incraigulous\AdminZone\ViewComposers\LayoutComposer;
 use Spatie\BladeX\ComponentDirectory\NamespacedDirectory;
 use Spatie\BladeX\Facades\BladeX;
@@ -21,6 +23,9 @@ class AdminZoneServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        if (config('app.env') !== 'testing') {
+            DB::statement("SET SESSION sql_mode = ''"); //TODO: Doing this for the searchable package. If they don't fix this issue by release, I should remove that package.
+        }
         $this->publishes([
             __DIR__.'/../config/adminzone.php' => config_path('adminzone.php')
         ], 'config');
@@ -33,6 +38,11 @@ class AdminZoneServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../dist' => public_path('vendor/adminzone'),
         ], 'public');
+
+        $this->publishes([
+            __DIR__.'/../database/factories' => database_path('factories'),
+            __DIR__ . '/../database/seeds'   => database_path('seeds'),
+        ], 'database');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'adminzone');
 
@@ -79,18 +89,8 @@ class AdminZoneServiceProvider extends ServiceProvider
 
     public function registerViewComposers()
     {
-        $componentDirectory = new NamespacedDirectory('adminzone::components/fields/');
-
-        $views = collect(File::files($componentDirectory->getAbsoluteDirectory()))
-            ->filter(function (SplFileInfo $file) {
-                return ends_with($file->getFilename(), '.blade.php');
-            })
-            ->map(function (SplFileInfo $file) use ($componentDirectory) {
-                return str_replace('/', '.', $componentDirectory->getViewName($file));
-            })->toArray();
-
         View::composer(
-            $views,
+            $this->getViewsInPath('adminzone::components/fields/'),
             FieldComposer::class
         );
 
@@ -98,6 +98,24 @@ class AdminZoneServiceProvider extends ServiceProvider
             'adminzone::layouts.layout',
             LayoutComposer::class
         );
+
+        View::composer(
+            $this->getViewsInPath('adminzone::elements/fields/'),
+            FieldElementComposer::class
+        );
+    }
+
+    public function getViewsInPath($path)
+    {
+        $directory = new NamespacedDirectory($path);
+
+        return collect(File::files($directory->getAbsoluteDirectory()))
+            ->filter(function (SplFileInfo $file) {
+                return ends_with($file->getFilename(), '.blade.php');
+            })
+            ->map(function (SplFileInfo $file) use ($directory) {
+                return str_replace('/', '.', $directory->getViewName($file));
+            })->toArray();
     }
 
 

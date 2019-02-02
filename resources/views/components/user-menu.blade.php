@@ -4,10 +4,10 @@
 <az-dropdown alignment="right">
     <az-button theme="secondary">{{ auth()->user()->name }}</az-button>
     <slot name="menu">
-        <az-dropdown-item>
-            <az-form-link :href="$logoutUrl">
+        <az-form-link :href="$logoutUrl">
+            <az-dropdown-item>
                 Logout
-            </az-form-link>
-        </az-dropdown-item>
+            </az-dropdown-item>
+        </az-form-link>
     </slot>
 </az-dropdown>

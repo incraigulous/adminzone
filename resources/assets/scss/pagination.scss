@@ -1,3 +1,14 @@
 .pagination {
-  justify-content: flex-end;
+  .page-item {
+    @include media-breakpoint-down(md) {
+      display: none;
+
+      &:first-child {
+        display: list-item;
+      }
+      &:last-child {
+        display: list-item;
+      }
+    }
+  }
 }

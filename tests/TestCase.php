@@ -84,7 +84,7 @@ class TestCase extends Base
         }
         $this->loadLaravelMigrations(['--database' =>  'testing']);
         $this->art('migrate', ['--database' => 'testing'])->run();
-        $this->art('db:seed', ['--class' => AdminZoneSeeder::class]);
+        $this->art('db:seed', ['--class' => \AdminZoneSeeder::class]);
 
         $this->faker = \Faker\Factory::create();
         $this->callback = function($param = false) {

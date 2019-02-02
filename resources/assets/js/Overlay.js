@@ -1,27 +1,23 @@
 import {EventBusSingleton as events} from "light-event-bus"
 import http from "./http"
 import uniqid from 'uniqid'
-import Noty from 'noty'
+import Notification from './Notification'
 
-class Tab {
+class Overlay {
     element = null
     closeCallback = function(){}
     failCallback = function(){}
     loadCallback = function(){}
     id = ''
-    addfailureNotification
 
     constructor () {
-        this.id = 'tab-' + uniqid()
-        events.publish('page:tab:register', this)
-        this.addfailureNotification = new Noty({
-            type: 'error',
-            text: 'Oops.. the tab failed to load.'
-        })
+        this.id = 'overlay-' + uniqid()
+        events.publish('overlay:register', this)
     }
 
-    load({path, params = {}, headers = {}}) {
-        headers['x-layout'] = 'page-tab'
+    load({path, params = {}, headers = {}, direction = 'right'}) {
+        headers['x-layout'] = 'overlay'
+        headers['x-overlay-direction'] = direction
         http.get(path, {
             params,
             headers
@@ -31,16 +27,23 @@ class Tab {
     }
 
     success({data: html}) {
-        this.element = document.createElement("div")
+        this.element = (this.element) ? this.element : document.createElement("div")
         this.element.id = this.id
-        this.element.dataset.target = "page-tabs.tab"
+        this.element.dataset.target = "overlay-stack.overlay"
         this.element.innerHTML = html
         this.loadCallback(this)
     }
 
-    failure(e) {
-        this.addfailureNotification.show();
-        this.failCallback(e)
+    failure(error) {
+        let message = null
+        try {
+             message = error.response.data.message
+        } catch (e) {}
+        new Notification({
+            type: 'error',
+            text: message ? message : 'Oops.. the overlay failed to load.'
+        }).show();
+        this.failCallback(error)
     }
 
     close(data) {
@@ -64,4 +67,4 @@ class Tab {
     }
 }
 
-export default Tab
+export default Overlay

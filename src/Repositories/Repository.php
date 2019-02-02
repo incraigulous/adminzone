@@ -39,14 +39,4 @@ abstract class Repository implements RepositoryInterface
 
         return $query;
     }
-
-    public function isRevisionable(): bool
-    {
-        return false;
-    }
-
-    public function isTranslatable(): bool
-    {
-        return false;
-    }
 }

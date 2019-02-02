@@ -24,4 +24,5 @@ $menuAttributes = $menuAttributes ?? [
     <div {!! AZ::helpers()->toHtmlAttributes($menuAttributes) !!} data-target="dropdown.menu">
         {{ $menu }}
     </div>
+    <div class="dropdown-backdrop" data-target="dropdown.backdrop" data-action="click->dropdown#close"></div>
 </div>

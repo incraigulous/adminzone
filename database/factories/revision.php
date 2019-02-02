@@ -1,9 +1,6 @@
 <?php
 
-use Incraigulous\AdminZone\Models\Revision;
-use Incraigulous\AdminZone\Models\User;
-
-$factory->define(Revision::class, function (Faker\Generator $faker) {
+$factory->define(\Incraigulous\AdminZone\Models\Revision::class, function (Faker\Generator $faker) {
     return [
         'revisionable_type' => \Incraigulous\AdminZone\Models\User::class,
         'revisionable_id' => $faker->numberBetween(1, 30),
@@ -13,9 +10,9 @@ $factory->define(Revision::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->state(Revision::class, 'user', function ($faker) {
+$factory->state(\Incraigulous\AdminZone\Models\Revision::class, 'user', function ($faker) {
     return [
-        'revisionable_id' => User::all()->random()->first()->id,
-        'user_id' => User::all()->random()->first()->id,
+        'revisionable_id' => \Incraigulous\AdminZone\Models\User::all()->random()->first()->id,
+        'user_id' => \Incraigulous\AdminZone\Models\User::all()->random()->first()->id,
     ];
 });

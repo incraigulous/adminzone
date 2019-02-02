@@ -75,6 +75,13 @@ $danger:        $red;
 $light:         $gray-100;
 $dark:          $gray-800;
 
+$z: (
+  "dropdown-backdrop": 999,
+  "dropdown": 1000,
+  "overlay": 1100,
+  "topbar": 1200
+);
+
 $theme-colors: ();
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(

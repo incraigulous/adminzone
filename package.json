@@ -18,6 +18,7 @@
     "light-event-bus": "^1.0.1",
     "noty": "^3.2.0-beta",
     "stimulus": "^1.1.1",
+    "throttle-debounce": "^2.1.0",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {

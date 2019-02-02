@@ -49,7 +49,12 @@ class AdminZone
         });
     }
 
-    static function findResource($slug): ResourceInterface
+    /**
+     * @param $slug
+     *
+     * @return ResourceInterface|null
+     */
+    static function findResource($slug)
     {
         return static::resources()->first(function($resources) use ($slug) {
             return $resources->getSlug() === $slug;

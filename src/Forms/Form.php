@@ -33,17 +33,28 @@ abstract class Form extends MenuItem implements FormInterface
         return 'form';
     }
 
-    public function successMessage(): string
+    protected function successMessage(): string
     {
-        return 'The form was submitted successfully.';
+        $messages = ['Your doing great!', 'Keep going!', 'Way to go!', 'Whoo Hoo!'];
+        return 'Success! ' . $messages[array_rand($messages)];
     }
 
-    public function view(): string
+    public function getSuccessMessage(): string
     {
-        return 'forms.' . $this->type();
+        return $this->successMessage();
     }
 
-    protected function getMain(): SectionInterface
+    protected function view(): string
+    {
+        return 'adminzone::forms.form';
+    }
+
+    public function getView(): string
+    {
+        return $this->view();
+    }
+
+    public function getMain(): SectionInterface
     {
         return $this->main(
             Main::create()
@@ -58,13 +69,23 @@ abstract class Form extends MenuItem implements FormInterface
         ];
     }
 
-    public function rules(): array
+    protected function rules(): array
     {
         return [];
     }
 
-    public function submission(): SubmissionInterface
+    public function getRules(): array
+    {
+        return $this->rules();
+    }
+
+    protected function submission(): SubmissionInterface
     {
         return new Submission;
+    }
+
+    public function getSubmission(): SubmissionInterface
+    {
+        return $this->submission();
     }
 }

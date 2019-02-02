@@ -14,27 +14,34 @@
     
     <body>
         
-        <div class="body-wrapper">
+        <div class="body-wrapper" data-controller="dashboard">
             @section('sidebar')
-                <az-sidebar>
+                <az-sidebar data-target="dashboard.sidebar">
                     <az-resources-menu :resources="$resources"></az-resources-menu>
                 </az-sidebar>
             @show
             
             <div class="content-wrapper">
                 @section('navbar')
-                    <az-topbar :resources="$resources"></az-topbar>
+                    <az-topbar :resources="$resources" data-target="dashboard.topbar"></az-topbar>
                 @show
                 @yield('utility-nav')
                 
                 <main>
-                    <az-page-tabs></az-page-tabs>
+                    <az-overlay-stack></az-overlay-stack>
+                    @section('flash')
+                        @if(Session::has('alert-message'))
+                            <div class="container-fluid">
+                                <az-alert :theme="Session::get('alert-theme', 'info')">{{ Session::get('alert-message') }}</az-alert>
+                            </div>
+                        @endif
+                    @show
                     @yield('main')
                 </main>
                 
                 @section('footer')
-                    <az-footer>
-                        Proudly created by <a href="http://www.github.com/incraigulous/">@incraigulous</a> from <a href="https://codezone.io">CodeZone</a>. I worked really hard on this! <a href="https://www.paypal.me/incraigulous">Give me a tip</a>?
+                    <az-footer data-target="dashboard.footer">
+                        {!! config('adminzone.copyright') !!}
                     </az-footer>
                 @show
             </div>

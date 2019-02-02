@@ -8,8 +8,9 @@ interface ResourceInterface extends MenuItemInterface
 {
     public function getRepository(): RepositoryInterface;
     public function getForm(): FormInterface;
-    public function getCreate(): FormInterface;
-    public function getUpdate(): FormInterface;
+    public function getCreateForm(): FormInterface;
+    public function getEditForm(): FormInterface;
+    public function getDestroySubmission(): SubmissionInterface;
     public function getFilters(): array;
     public function getColumns(): array;
     public function getLenses(): array;
@@ -17,4 +18,8 @@ interface ResourceInterface extends MenuItemInterface
     public function getShowRoute(): string;
     public function getEditRoute(): string;
     public function getCreateRoute(): string;
+    public function getDestroyRoute(): string;
+    public function isSearchable(): bool;
+    public function getFields(): array;
+
 }

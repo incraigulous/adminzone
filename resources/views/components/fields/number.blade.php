@@ -1,12 +1,15 @@
+<?php
+$attributes['class'] = $attributes['class'] . ' ' . 'form-control';
+?>
 <az-form-group>
     @if($label)
         <slot name="label">
             {{  $label }}
         </slot>
     @endif
-    @if($prepend)
+    @if($before)
         <slot name="prepend">
-            {{ $prepend }}
+            {{ $before }}
         </slot>
     @endif
     <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="number" value="{{ $value }}">

@@ -23,4 +23,7 @@ interface RepositoryInterface
     public function isRevisionable(): bool;
     public function revisions($id): Collection;
     public function isTranslatable(): bool;
+    public function search(string $string, $with = [], $perPage = 15): LengthAwarePaginator;
+    public function isSearchable(): bool;
+    public function availableFields(): Collection;
 }

@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/functions";
-@import "~noty/src/noty.scss";
+@import "~noty/src/noty";
+@import "~noty/src/themes/bootstrap-v4";
 @import "./variables";
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/variables';
@@ -14,3 +15,9 @@
 @import "./footer";
 @import "./table";
 @import "./pagination";
+@import "./overlay-stack";
+@import "./search";
+@import "./dropdown";
+@import "./form-group";
+@import "./helpers";
+@import "./utility-nav";

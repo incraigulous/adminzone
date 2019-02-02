@@ -1,15 +1,17 @@
 <?php
-    $method = $method ?? 'POST';
-    
+    $method =  strtoupper($method ?? '');
     $attributes = $attributes ?? [
         'action' => $href,
-        'method' => $method
+        'method' => AZ::helpers()->formMethod($method)
     ];
 ?>
 
-<form {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>
+<form {!! AZ::helpers()->toHtmlAttributes($attributes) !!} data-controller="form-link">
     @csrf
-    <az-button theme="link" type="submit" class="m-0 p-0">
+    @if(AZ::helpers()->isSpoofedMethod($method))
+        @method($method)
+    @endif
+    <span data-action="click->form-link#submit">
         {{ $slot }}
-    </az-button>
+    </span>
 </form>

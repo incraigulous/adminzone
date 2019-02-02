@@ -4,10 +4,12 @@ namespace Incraigulous\AdminZone\Contracts;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use Incraigulous\AdminZone\Elements;
 
 interface FormInterface extends ItemInterface
 {
-    public function rules(): array;
-    public function successMessage(): string;
-    public function submission(): SubmissionInterface;
+    public function getRules(): array;
+    public function getSuccessMessage(): string;
+    public function getSubmission(): SubmissionInterface;
+    public function getMain(): SectionInterface;
 }

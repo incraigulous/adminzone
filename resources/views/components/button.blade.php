@@ -13,13 +13,13 @@ ATTRS:
 - $iconLeft: The icomoon icon to appear to the left of the label. Example: chevron-left.
 --}}
 <?php
-$title = $title ?? '';
-$href = $href ?? '';
-$size = $size ?? '';
+$title = $title ?? null;
+$href = $href ?? null;
+$size = $size ?? null;
 $theme = $theme ?? 'primary';
 $element = $element ?? 'button';
-$type = '';
-$role = '';
+$type = $type ?? null;
+$role = null;
 if ($element === 'button') {
     $type = $type ?? 'button';
 } else {
@@ -32,12 +32,13 @@ $buttonAttributes = [
     'class'  => AZ::helpers()->classes(
         'btn',
         'btn-' . $theme,
-        ($size) ? 'btn-' . $size : '',
+        ($size) ? 'btn-' . $size : null,
         $class ?? ''),
-    'id' => $id ?? '',
+    'id' => $id ?? null,
     'href' => $href,
     'title' => $title,
     'data-action' => $dataAction,
+    'data-target' => $dataTarget ?? null
 ];
 
 ?>

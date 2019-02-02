@@ -1,16 +1,24 @@
 <?php
+$method =  strtoupper($method ?? '');
+$errors = $errors->count() ? collect($errors->all()) : collect([]);
+
 $attributes = $attributes ?? [
-        'method' => $method ?? 'POST',
+        'method' => AZ::helpers()->formMethod($method),
         'action' => $action ?? '',
         'data-target' => $dataTarget ?? '',
         'data-action' => $dataAction ?? '',
-        'novalidate' => 'novalidate'
+        'novalidate' => 'novalidate',
+        'enctype' => $enctype ?? null
     ];
 ?>
 <form class="form {{ $class ?? '' }}" {!! AZ::helpers()->toHtmlAttributes($attributes); !!}>
-    @if(!empty($errors->first()))
-        <div class="alert alert-danger">{{ $errors->first() }} </div>
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    @if(AZ::helpers()->isSpoofedMethod($method))
+        @method($method)
     @endif
+    @foreach($errors as $error)
+        <div class="alert alert-danger">{{ $error }} </div>
+    @endforeach
     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
             <div class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</div>

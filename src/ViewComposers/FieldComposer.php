@@ -23,14 +23,17 @@ class FieldComposer
         $name =  $data['name'] ?? '';
         $validationName = $validationName ?? $name;
         $label = $data['label'] ?? '';
-        $value = $data['value'] ?? old($name);
+        $entry = $data['entry'] ?? null;
+        $value = $data['value'] ?? null;
+        $value = $value ?? old($name);
+        $placeholder = $data['placeholder'] ?? null;
 
         if (!isset($placeholder)) {
             $placeholder = (isset($label)) ? $label : ucwords(str_replace_last('_', ' ', $name));
         }
         $attributes = $attributes ?? [
-                'class' => AdminZone::helpers()->classes($data['class'] ?? '', 'form-control'),
-                'name' => $data['name'] ?? '',
+                'class' => AdminZone::helpers()->classes($data['class'] ?? ''),
+                'name' => $name,
                 'placeholder' => $placeholder,
                 'data-target' => $data['dataTarget'] ?? '',
                 'data-action' => $data['dataAction'] ?? '',
@@ -39,7 +42,7 @@ class FieldComposer
         $tip = $tip ?? '';
         $error = $error ?? '';
         $label = $label ?? '';
-        $prepend = $prepend ?? '';
+        $before = $before ?? '';
 
         $view->with('name', $name);
         $view->with('label', $label);
@@ -49,7 +52,8 @@ class FieldComposer
         $view->with('tip', $tip);
         $view->with('error', $error);
         $view->with('label', $label);
-        $view->with('prepend', $prepend);
+        $view->with('before', $before);
         $view->with('value', $value);
+        $view->with('entry', $entry);
     }
 }

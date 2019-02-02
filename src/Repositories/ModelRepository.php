@@ -3,13 +3,12 @@
 namespace Incraigulous\AdminZone\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Contracts\RepositoryInterface;
-use Incraigulous\AdminZone\Models\Contracts\Revisionable;
-use phpDocumentor\Reflection\Types\Parent_;
-use Spatie\Translatable\HasTranslations;
+use Incraigulous\AdminZone\Models\Traits\Revisionable;
+use Incraigulous\AdminZone\Models\Traits\Searchable;
+use Incraigulous\AdminZone\Models\Traits\Translatable;
 
 /**
  * Class Resolver
@@ -63,20 +62,26 @@ class ModelRepository extends Repository implements RepositoryInterface
     public function update($id, array $input)
     {
         $model = $this->find($id);
-        $model->fill($input);
+        foreach($input as $key => $value) {
+            $model->$key = $value;
+        }
         $model->save();
         return $model;
     }
 
     public function create(array $input)
     {
-        $model = $this->model->create($input);
-        return $model->save();
+        $model = $this->model->newInstance();
+        foreach($input as $key => $value) {
+            $model->$key = $value;
+        }
+        $model->save();
+        return $model;
     }
 
     public function isRevisionable(): bool
     {
-        return $this->model instanceof Revisionable;
+        return array_key_exists(Revisionable::class, class_uses($this->model));
     }
 
     public function revisions($id): Collection
@@ -90,6 +95,25 @@ class ModelRepository extends Repository implements RepositoryInterface
 
     public function isTranslatable(): bool
     {
-        return array_key_exists(HasTranslations::class, class_uses($this->model));
+        return array_key_exists(Translatable::class, class_uses($this->model));
+    }
+
+    public function isSearchable(): bool
+    {
+        return array_key_exists(Searchable::class, class_uses($this->model));
+    }
+
+    public function search(string $query, $with = [], $perPage = 15): LengthAwarePaginator
+    {
+       $builder = $this->model->search($query);
+       foreach($with as $relationship) {
+           $builder->with($relationship);
+       }
+       return $builder->paginate($perPage);
+    }
+
+    public function availableFields(): Collection
+    {
+        return collect($this->model->availableFields());
     }
 }

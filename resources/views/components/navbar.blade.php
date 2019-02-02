@@ -3,7 +3,8 @@
     $themeColor = $themeColor ?? 'light';
     $textColor = $textColor ?? AZ::helpers()->textColorFromTheme($themeColor);
     $attributes = $attributes ?? [
-        'class' => AZ::helpers()->classes("d-dlex", "navbar", "navbar-expand-lg", "navbar-{$themeColor }", "bg-{$themeColor}", $class, "text-{$textColor}")
+        'class' => AZ::helpers()->classes("d-dlex", "navbar", "navbar-expand-lg", "navbar-{$themeColor }", "bg-{$themeColor}", $class, "text-{$textColor}"),
+        'data-target' => $dataTarget ?? null
     ];
 ?>
 <nav {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>

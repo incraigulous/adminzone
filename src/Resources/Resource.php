@@ -4,13 +4,18 @@ namespace Incraigulous\AdminZone\Resources;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 use Incraigulous\AdminZone\Contracts\ResourceInterface;
 use Incraigulous\AdminZone\Contracts\FormInterface;
+use Incraigulous\AdminZone\Contracts\SubmissionInterface;
 use Incraigulous\AdminZone\Exceptions\ResourceException;
 use Incraigulous\AdminZone\MenuItems\MenuItem;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
 use Incraigulous\AdminZone\Item;
+use Incraigulous\AdminZone\Submissions\CallbackSubmission;
+use Incraigulous\Objection\DataTransferObject;
 
 /**
  * Class Resource
@@ -26,6 +31,8 @@ abstract class Resource extends MenuItem implements ResourceInterface
     {
         return [
             'ID' => 'id',
+            'Label' => 'label',
+            'Description' => 'description',
             'Created' => function($model) {
                 return $model->created_at->format('M d Y');
             },
@@ -33,6 +40,18 @@ abstract class Resource extends MenuItem implements ResourceInterface
                 return $model->updated_at->format('M d Y');
             }
         ];
+    }
+
+    protected function fields(): array
+    {
+        return $this->repository()->availableFields()->reduce(function($carry, $field) {
+            $carry[ucfirst(str_replace("_", " ", $field))] = $field;
+            return $carry;
+        }, []);
+    }
+
+    public function getFields(): array {
+        return $this->fields();
     }
 
     public function lenses(): array
@@ -45,19 +64,28 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return null;
     }
 
-    public function create()
+    protected function createForm()
     {
         return $this->form();
     }
 
-
-    public function update()
+    protected function editForm()
     {
         return $this->form();
     }
 
     protected function model() {
         return null;
+    }
+
+    protected function destroySubmission(): SubmissionInterface
+    {
+        return new CallbackSubmission(
+            function(Request $request, RepositoryInterface $repository) {
+                $id = $request->route('id');
+                return $repository->delete($id);
+            }
+        );
     }
 
     public function repository(): RepositoryInterface
@@ -97,33 +125,47 @@ abstract class Resource extends MenuItem implements ResourceInterface
 
     public function createRoute()
     {
-        return $this->getRoute() . ':create';
+        return $this->getRoute() . '.create';
     }
 
     public function editRoute()
     {
-        return $this->getRoute() . ':edit';
+        return $this->getRoute() . '.edit';
     }
 
     public function showRoute()
     {
-        return $this->getRoute() . ':show';
+        return $this->getRoute() . '.show';
     }
 
+    public function storeRoute()
+    {
+        return $this->getRoute() . '.store';
+    }
+
+    public function updateRoute()
+    {
+        return $this->getRoute() . '.update';
+    }
+
+    public function destroyRoute()
+    {
+        return $this->getRoute() . '.destroy';
+    }
 
     public function getForm(): FormInterface
     {
         return $this->form();
     }
 
-    public function getCreate(): FormInterface
+    public function getCreateForm(): FormInterface
     {
-        return $this->create();
+        return $this->createForm();
     }
 
-    public function getUpdate(): FormInterface
+    public function getEditForm(): FormInterface
     {
-        return $this->update();
+        return $this->editForm();
     }
 
     public function getFilters(): array
@@ -159,5 +201,35 @@ abstract class Resource extends MenuItem implements ResourceInterface
     public function getShowRoute(): string
     {
         return $this->showRoute();
+    }
+
+    public function getUpdateRoute(): string
+    {
+        return $this->updateRoute();
+    }
+
+    public function getStoreRoute(): string
+    {
+        return $this->storeRoute();
+    }
+
+    public function getDestroyRoute(): string
+    {
+        return $this->destroyRoute();
+    }
+
+    public function isSearchable(): bool
+    {
+        return $this->repository()->isSearchable();
+    }
+
+    public function search($string): Collection
+    {
+        return $this->repository()->search($string);
+    }
+
+    public function getDestroySubmission(): SubmissionInterface
+    {
+        return $this->destroySubmission();
     }
 }

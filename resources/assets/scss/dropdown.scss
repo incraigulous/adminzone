@@ -1,0 +1,14 @@
+.dropdown {
+  .dropdown-backdrop {
+    @include position-fit;
+    position: fixed;
+    display: none;
+  }
+
+  &.show {
+    .dropdown-backdrop {
+      display: block;
+      z-index: map_get($z, 'dropdown-backdrop');
+    }
+  }
+}

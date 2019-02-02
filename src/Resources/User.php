@@ -3,7 +3,7 @@
 namespace Incraigulous\AdminZone\Resources;
 
 
-use Incraigulous\AdminZone\Forms\UserForm;
+use Incraigulous\AdminZone\Forms\UserEditForm;
 
 /**
  * Class ExampleResource
@@ -26,7 +26,7 @@ class User extends Resource
     }
 
     public function form() {
-        return new UserForm();
+        return new UserEditForm();
     }
 
     public function model() {

@@ -7,9 +7,9 @@
             {{  $label }}
         </slot>
     @endif
-    @if($prepend)
+    @if($before)
         <slot name="prepend">
-            {{ $prepend }}
+            {{ $before }}
         </slot>
     @endif
     <select {!! AZ::helpers()->toHtmlAttributes($attributes); !!}>

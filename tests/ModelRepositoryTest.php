@@ -11,6 +11,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Filters\ExampleModelFilter;
 use Incraigulous\AdminZone\Models\Model;
+use Incraigulous\AdminZone\Models\SearchableUser;
 use Incraigulous\AdminZone\Models\TranslatableUser;
 use Incraigulous\AdminZone\Models\User;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
@@ -60,7 +61,32 @@ class ModelRepositoryTest extends TestCase
         $translatableUser = new TranslatableUser();
         $repository = new ModelRepository($user);
         $translatableRepository = new ModelRepository($translatableUser);
-        $this->assertFalse($repository->isTranslatable());
         $this->assertTrue($translatableRepository->isTranslatable());
+        $this->assertFalse($repository->isTranslatable());
+    }
+
+    public function testIsSearchable()
+    {
+        factory(User::class, 50)->create();
+        $needle1 = factory(User::class)->create([
+            'name' => 'needle 1'
+        ]);
+        $needle2 = factory(User::class)->create([
+            'email' => 'needle 2'
+        ]);
+
+        $user = new SearchableUser();
+        $repository = new ModelRepository($user);
+
+        $this->assertTrue($repository->isSearchable());
+        $results = $repository->search('needle');
+        $found1 = $results->first(function($user) use ($needle1) {
+            return $user->id === $needle1->id;
+        });
+        $found2 = $results->first(function($user) use ($needle2) {
+            return $user->id === $needle2->id;
+        });
+        $this->assertNotNull($found1);
+        $this->assertNotNull($found2);
     }
 }

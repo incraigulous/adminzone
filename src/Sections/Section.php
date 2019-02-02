@@ -36,4 +36,10 @@ class Section extends Element implements SectionInterface
     {
         return 'section';
     }
+
+    protected function view(): string
+    {
+        return 'adminzone::elements.sections.' . $this->getSlug();
+    }
+
 }

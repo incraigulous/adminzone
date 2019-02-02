@@ -1,0 +1,8 @@
+.form-group {
+  &.form-group-horizontal {
+    label {
+      margin-top: $input-padding-y;
+      padding-top: $input-border-width;
+    }
+  }
+}

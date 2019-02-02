@@ -89,4 +89,9 @@ abstract class Field extends Element implements FieldInterface
     {
         return $this->name;
     }
+
+    protected function view(): string
+    {
+        return 'adminzone::elements.fields.' . $this->getSlug();
+    }
 }

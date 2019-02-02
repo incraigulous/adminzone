@@ -7,6 +7,7 @@ use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 use Incraigulous\AdminZone\Contracts\SubmissionInterface;
 use Incraigulous\AdminZone\Elements;
 use Incraigulous\AdminZone\Exceptions\SubmissionException;
+use PhpParser\Node\Stmt\Return_;
 
 /**
  * Class Submission
@@ -23,16 +24,13 @@ class Submission implements SubmissionInterface
      */
     public function submit(Request $request, RepositoryInterface $repository)
     {
-        $input = $request->input;
+        $input = array_only($request->all(), $repository->availableFields());
+        $id = $request->route('id');
 
-        if (!$input) {
-            throw new SubmissionException("There is no input");
-        }
-
-        if (isset($input['id'])) {
-            $repository->update($input['id'], $input);
+        if ($id) {
+            return $repository->update($id, $input);
         } else {
-            $repository->create($input);
+            return $repository->create($input);
         }
     }
 }

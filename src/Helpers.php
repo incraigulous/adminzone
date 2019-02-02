@@ -17,7 +17,9 @@ class Helpers
     {
         $attributes = '';
         foreach ($array as $attrName => $attrValue) {
-            $attributes .= $attrName . '="' . $attrValue . '" ';
+            if ($attrValue !== null) {
+                $attributes .= $attrName . '="' . $attrValue . '" ';
+            }
         }
         return $attributes;
     }
@@ -57,5 +59,24 @@ class Helpers
                 $textColor = 'white';
         }
         return $textColor;
+    }
+
+    public function isSpoofedMethod($method): bool
+    {
+        if (!$method) {
+            $method = '';
+        }
+        return in_array(strtoupper($method), [
+            'PUT', 'PATCH', "DELETE"
+        ]);
+    }
+
+    public function formMethod($method): string
+    {
+        $method = strtoupper($method);
+        if (!$method || $this->isSpoofedMethod($method)) {
+            return 'POST';
+        }
+        return $method;
     }
 }
