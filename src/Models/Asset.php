@@ -12,7 +12,8 @@ class Asset extends Model
     protected $descriptionField = 'filename';
     protected $searchable = [
         'columns' => [
-            'filename' => 10
+            'filename' => 9,
+            'title' => 10
         ],
     ];
 }

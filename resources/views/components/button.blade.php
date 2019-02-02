@@ -25,7 +25,7 @@ if ($element === 'button') {
 } else {
     $role = $role ?? 'button';
 }
-$dataAction = $dataAction ?? '';
+$dataAction = $dataAction ?? null;
 $buttonAttributes = [
     'type'   => $type,
     'role' => $role,

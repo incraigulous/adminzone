@@ -20,7 +20,7 @@
                         <az-field-text placeholder="Filter" name="q" class="mr-3" :value="request()->get('q')"></az-field-text>
                     </div>
                     <div class="flex-grow-0">
-                        <az-button>Filter</az-button>
+                        <az-button type="submit">Filter</az-button>
                     </div>
                 </az-form>
             </div>
