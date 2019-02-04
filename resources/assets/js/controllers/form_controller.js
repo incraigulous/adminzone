@@ -24,6 +24,11 @@ export default class extends Controller
         return this.element.getAttribute("action")
     }
 
+    get method()
+    {
+        return this.element.hasAttribute("method") ? this.element.getAttribute("method") : 'POST'
+    }
+
     get fieldErrorElements()
     {
         return this.element.querySelectorAll('.invalid-feedback')
@@ -44,8 +49,11 @@ export default class extends Controller
         event.preventDefault()
         this.beforeSubmission()
 
-        await http.post(this.action, this.payload)
-            .then(this.handleSuccess)
+        await http({
+            method: this.method,
+            url: this.action,
+            data: this.payload
+        }).then(this.handleSuccess)
             .catch(this.handleError)
             .finally(this.afterSubmission)
     }
