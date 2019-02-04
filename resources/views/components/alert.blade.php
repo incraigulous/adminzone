@@ -2,13 +2,15 @@
 $class = $class ?? null;
 $theme = $theme ?? 'info';
 $href = $href ?? null;
+$dataTarget = $dataTarget ?? null;
 $attributes = $attributes ?? [
-        'class' => AZ::helpers()->classes('alert', $class, "alert-{$theme}", 'd-block'),
+        'class' => AZ::helpers()->classes('alert', $class, "alert-{$theme}", 'w-100'),
         'href' => $href,
-        'role' => 'alert'
+        'role' => 'alert',
+        'data-target' => $dataTarget
     ];
 ?>
 
-<a {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>
+<div {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>
     {{ $slot }}
-</a>
+</div>

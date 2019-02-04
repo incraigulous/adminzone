@@ -22,7 +22,7 @@ class AssetSubmission implements SubmissionInterface
      * @throws SubmissionException
      * @throws \Throwable
      */
-    public function submit(Request $request, RepositoryInterface $repository)
+    public function submit(Request $request, Elements $fields, RepositoryInterface $repository)
     {
         $id = $request->route('id');
         $payload = [];

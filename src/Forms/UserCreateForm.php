@@ -5,6 +5,7 @@ namespace Incraigulous\AdminZone\Forms;
 
 use Incraigulous\AdminZone\Contracts\SectionInterface;
 use Incraigulous\AdminZone\Contracts\SubmissionInterface;
+use Incraigulous\AdminZone\Fields\BelongsToField;
 use Incraigulous\AdminZone\Fields\EmailField;
 use Incraigulous\AdminZone\Fields\PasswordField;
 use Incraigulous\AdminZone\Fields\TextField;
@@ -27,16 +28,12 @@ class UserCreateForm extends Form
         ];
     }
 
-    protected function submission(): SubmissionInterface
-    {
-        return new UserSubmission();
-    }
-
     protected function main(SectionInterface $main): SectionInterface
     {
         $main->field(TextField::create('Name'))
             ->field(EmailField::create('Email'))
-            ->field(PasswordField::create('password'));
+            ->field(PasswordField::create('password'))
+            ->field(BelongsToField::create('Avatar'));
 
         return $main;
     }

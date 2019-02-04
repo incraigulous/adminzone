@@ -10891,6 +10891,14 @@ main {
   height: auto;
 }
 
+.top-bar .avatar {
+  margin-top: -15px;
+  margin-bottom: -10px;
+  margin-left: 0.5rem;
+  width: 40px;
+  height: 40px;
+}
+
 .breadcrumb {
   background-color: transparent;
   margin-bottom: 0;

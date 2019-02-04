@@ -3,10 +3,12 @@
 namespace Incraigulous\AdminZone\Submissions;
 
 use Illuminate\Http\Request;
+use Incraigulous\AdminZone\Contracts\ElementInterface;
 use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 use Incraigulous\AdminZone\Contracts\SubmissionInterface;
 use Incraigulous\AdminZone\Elements;
 use Incraigulous\AdminZone\Exceptions\SubmissionException;
+use Incraigulous\AdminZone\Fields\Field;
 use PhpParser\Node\Stmt\Return_;
 
 /**
@@ -22,15 +24,18 @@ class Submission implements SubmissionInterface
      * @throws SubmissionException
      * @throws \Throwable
      */
-    public function submit(Request $request, RepositoryInterface $repository)
+    public function submit(Request $request, Elements $fields, RepositoryInterface $repository)
     {
-        $input = array_only($request->all(), $repository->availableFields());
+        $payload = [];
+        $fields->each(function(Field $field) use ($request, &$payload) {
+            $field->handleSubmission($request, $payload);
+        });
         $id = $request->route('id');
 
         if ($id) {
-            return $repository->update($id, $input);
+            return $repository->update($id, $payload);
         } else {
-            return $repository->create($input);
+            return $repository->create($payload);
         }
     }
 }

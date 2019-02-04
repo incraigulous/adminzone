@@ -22,13 +22,13 @@ class FormTest extends TestCase
     {
         $rules = ['name' => 'required'];
         $form = new UserEditForm();
-        $this->assertArrayHasKey('first_name', $form->rules());
+        $this->assertArrayHasKey('name', $form->rules());
     }
 
     public function testLabel()
     {
         $form = new UserEditForm();
-        $this->assertEquals('User Form', $form->getLabel());
+        $this->assertEquals('User Edit Form', $form->getLabel());
     }
 
     public function testToArray()
@@ -40,8 +40,8 @@ class FormTest extends TestCase
         $array = $form->toArray();
 
         $this->assertEquals('form', $array['type']);
-        $this->assertEquals('user-form', $array['slug']);
-        $this->assertEquals('First Name', $array['main']['elements'][0]['label']);
+        $this->assertEquals('user-edit-form', $array['slug']);
+        $this->assertEquals('Name', $array['main']['elements'][0]['label']);
     }
 
     public function testToJson()
@@ -51,8 +51,7 @@ class FormTest extends TestCase
         $json = $form->toJson();
 
         $this->assertJsonValueEquals($json, '$.type', 'form');
-        $this->assertJsonValueEquals($json, '$.main.elements[0][label]', 'First Name');
-        $this->assertJsonValueEquals($json, '$.main.elements[1][name]', 'last_name');
-        $this->assertJsonValueEquals($json, '$.label', 'User Form');
+        $this->assertJsonValueEquals($json, '$.main.elements[0][label]', 'Name');
+        $this->assertJsonValueEquals($json, '$.label', 'User Edit Form');
     }
 }

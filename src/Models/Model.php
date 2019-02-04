@@ -4,6 +4,7 @@ namespace Incraigulous\AdminZone\Models;
 
 
 use Illuminate\Support\Facades\Schema;
+use Incraigulous\AdminZone\Models\Traits\Administratable;
 use Incraigulous\AdminZone\Models\Traits\Labeled;
 
 /**
@@ -11,14 +12,5 @@ use Incraigulous\AdminZone\Models\Traits\Labeled;
  */
 class Model extends \Illuminate\Database\Eloquent\Model
 {
-    use Labeled;
-
-    public function availableFields()
-    {
-        if (property_exists($this, 'fields')) {
-            return $this->fields;
-        }
-
-        return Schema::getColumnListing($this->getTable());
-    }
+    use Administratable;
 }

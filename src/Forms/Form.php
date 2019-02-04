@@ -7,6 +7,7 @@ use Illuminate\Validation\Factory;
 use Incraigulous\AdminZone\Contracts\FormInterface;
 use Incraigulous\AdminZone\Contracts\SectionInterface;
 use Incraigulous\AdminZone\Contracts\SubmissionInterface;
+use Incraigulous\AdminZone\Elements;
 use Incraigulous\AdminZone\Fields\Fields;
 use Incraigulous\AdminZone\Item;
 use Incraigulous\AdminZone\MenuItems\MenuItem;
@@ -87,5 +88,10 @@ abstract class Form extends MenuItem implements FormInterface
     public function getSubmission(): SubmissionInterface
     {
         return $this->submission();
+    }
+
+    public function getFields(): Elements
+    {
+        return $this->getMain()->getFields();
     }
 }

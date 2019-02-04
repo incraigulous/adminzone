@@ -22,4 +22,8 @@ class User extends Model implements
     protected $descriptionField = 'email';
     protected $guarded = ['id', 'email_verified_at', 'remember_token', 'password'];
 
+    public function avatar()
+    {
+        return $this->belongsTo(Asset::class, 'avatar_id');
+    }
 }

@@ -19,9 +19,9 @@ class CallbackSubmission extends Submission
         $this->callback = $callback;
     }
 
-    public function submit(Request $request, RepositoryInterface $repository)
+    public function submit(Request $request, Elements $fields, RepositoryInterface $repository)
     {
         $callback = $this->callback;
-        return $callback($request, $repository);
+        return $callback($request, $fields, $repository);
     }
 }

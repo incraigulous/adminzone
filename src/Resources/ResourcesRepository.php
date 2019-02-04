@@ -3,6 +3,7 @@
 namespace Incraigulous\AdminZone\Resources;
 
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use Incraigulous\AdminZone\AdminZone;
 use Incraigulous\Objection\Collection;
 use Incraigulous\Objection\DataTransferObject;

@@ -6,6 +6,7 @@ namespace Incraigulous\AdminZone\Controllers;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Incraigulous\AdminZone\AdminZone;
+use Incraigulous\AdminZone\Elements;
 
 /**
  * Class ResourceController
@@ -51,12 +52,15 @@ class ResourceController extends Controller
         $resource = AdminZone::findResource($slug);
         $form = $resource->getEditForm();
         $this->validate($request, $form->getRules());
-        $form->getSubmission()->submit($request, $resource->getRepository());
-        return redirect()->back()->with(
-            [
-                'alert-message' => $form->getSuccessMessage(),
-                'alert-theme' => 'success'
-            ]);
+        $updated = $form->getSubmission()->submit(
+            $request,
+            $form->getFields(),
+            $resource->getRepository()
+        );
+        return [
+          'data' => $updated,
+          'message' => $form->getSuccessMessage(),
+        ];
     }
 
     public function create($slug) {
@@ -71,22 +75,25 @@ class ResourceController extends Controller
         $resource = AdminZone::findResource($slug);
         $form = $resource->getCreateForm();
         $this->validate($request, $form->getRules());
-        $result = $form->getSubmission()->submit($request, $resource->getRepository());
-        return redirect()->route($resource->getEditRoute(), [
-            'slug' => $resource->getSlug(),
-            'id' => $result->id
-        ])->with(
-                [
-                    'alert-message' => $form->getSuccessMessage(),
-                    'alert-theme' => 'success'
-                ]
+        $result = $form->getSubmission()->submit(
+            $request,
+            $form->getFields(),
+            $resource->getRepository()
         );
+        return [
+            'data' => $result,
+            'message' => $form->getSuccessMessage(),
+            'redirect' => route($resource->getEditRoute(), [
+                'slug' => $resource->getSlug(),
+                'id' => $result->id
+            ])
+        ];
     }
 
     public function destroy(Request $request, $slug) {
         $resource = AdminZone::findResource($slug);
         $submission = $resource->getDestroySubmission();
-        $submission->submit($request, $resource->getRepository());
+        $submission->submit($request, new Elements([]), $resource->getRepository());
         return redirect()->route($resource->getRoute(), [
             'slug' => $resource->getSlug()
         ])->with(

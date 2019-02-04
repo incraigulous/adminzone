@@ -5,11 +5,13 @@ namespace Incraigulous\AdminZone\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 use Incraigulous\AdminZone\Contracts\ResourceInterface;
 use Incraigulous\AdminZone\Contracts\FormInterface;
 use Incraigulous\AdminZone\Contracts\SubmissionInterface;
+use Incraigulous\AdminZone\Elements;
 use Incraigulous\AdminZone\Exceptions\ResourceException;
 use Incraigulous\AdminZone\MenuItems\MenuItem;
 use Incraigulous\AdminZone\Repositories\ModelRepository;
@@ -223,7 +225,7 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return $this->repository()->isSearchable();
     }
 
-    public function search($string): Collection
+    public function search($string): LengthAwarePaginator
     {
         return $this->repository()->search($string);
     }

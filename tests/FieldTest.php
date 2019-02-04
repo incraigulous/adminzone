@@ -56,21 +56,6 @@ class FieldTest extends TestCase
         $this->assertEquals($field->toArray()['label'], $data->label);
     }
 
-    public function testBeforeSave()
-    {
-        $data = DataFactory::make('field:text');
-        $field = TextField::create($data->label);
-
-
-        $field->default($data->default);
-        $field->beforeSave($this->callback);
-
-        $beforeSave = $field->getBeforeSave();
-
-        $this->assertInstanceOf(Field::class, $field);
-        $this->assertTrue($beforeSave(true));
-    }
-
     public function testCreate()
     {
         $field =TextField::create( 'First Name')->default('Craig');

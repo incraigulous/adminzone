@@ -4,6 +4,7 @@ namespace Incraigulous\AdminZone\Tests;
 
 
 use Incraigulous\AdminZone\AdminZone;
+use Incraigulous\AdminZone\Models\Asset;
 use Incraigulous\AdminZone\Models\SearchableUser;
 use Incraigulous\AdminZone\Models\User;
 
@@ -67,7 +68,7 @@ class UserTest extends TestCase
                 'id' => $user->id
             ]),
             $payload
-        )->assertResponseStatus(302);
+        )->assertResponseStatus(200);
         $new = User::find($user->id);
         $this->assertEquals($email, $new->email);
     }
@@ -141,6 +142,13 @@ class UserTest extends TestCase
             'slug' => $resource->getSlug()
         ]));
         $this->assertNull($new);
+    }
+
+    public function testItHasAvatar()
+    {
+        $user = factory(User::class)->create();
+        $this->assertInstanceOf(Asset::class,  $user->avatar);
+        $this->assertTrue(is_string($user->avatar->file));
     }
 
 }

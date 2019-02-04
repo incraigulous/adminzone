@@ -7,6 +7,8 @@ namespace Incraigulous\AdminZone\Models;
  */
 class Revision extends Model
 {
+    public $guarded = ['id'];
+
     protected $casts = [
         'data' => 'array',
     ];
