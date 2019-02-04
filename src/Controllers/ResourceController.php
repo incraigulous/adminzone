@@ -83,7 +83,7 @@ class ResourceController extends Controller
         return [
             'data' => $result,
             'message' => $form->getSuccessMessage(),
-            'redirect' => route($resource->getEditRoute(), [
+            'redirect' => route($resource->getShowRoute(), [
                 'slug' => $resource->getSlug(),
                 'id' => $result->id
             ])

@@ -14,7 +14,8 @@ $attributes = $attributes ?? [
         'data-action' => $dataAction,
         'novalidate' => 'novalidate',
         'enctype' => $enctype ?? null,
-        'data-controller' => 'form'
+        'data-controller' => 'form',
+        'data-form-should-redirect' => $shouldRedirect
     ];
 ?>
 <form class="form {{ $class ?? '' }}" {!! AZ::helpers()->toHtmlAttributes($attributes); !!}>

@@ -83,7 +83,7 @@ abstract class Resource extends MenuItem implements ResourceInterface
     protected function destroySubmission(): SubmissionInterface
     {
         return new CallbackSubmission(
-            function(Request $request, RepositoryInterface $repository) {
+            function(Request $request, Elements $fields, RepositoryInterface $repository) {
                 $id = $request->route('id');
                 return $repository->delete($id);
             }

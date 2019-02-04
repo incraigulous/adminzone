@@ -15,11 +15,14 @@
     <div class="container-fluid">
         <div class="mt-2 d-flex mx-3 text-center">
             <div class="flex-grow-1 m-2">
-                <az-form :action="route($resource->getRoute(), ['slug' => $resource->getSlug()])" method="GET" class="d-flex" button-label="Filter">
+                <form action="{{ route($resource->getRoute(), ['slug' => $resource->getSlug()]) }}" method="GET" class="d-flex">
                     <div class="flex-grow-1">
                         <az-field-text placeholder="Filter" name="q" class="mr-3" :value="request()->get('q')"></az-field-text>
                     </div>
-                </az-form>
+                    <div class="flex-grow-0">
+                        <az-button type="submit">Filter</az-button>
+                    </div>
+                </form>
             </div>
             <div class="flex-grow-0 m-2">
                 {{ $items->links() }}
