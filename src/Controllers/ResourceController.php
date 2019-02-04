@@ -103,4 +103,12 @@ class ResourceController extends Controller
             ]
         );
     }
+
+    public function select($slug) {
+        $resource = AdminZone::findResource($slug);
+        if (!$resource) {
+            return abort(404);
+        }
+        return view('adminzone::resources.select');
+    }
 }
