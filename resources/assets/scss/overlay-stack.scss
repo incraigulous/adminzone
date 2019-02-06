@@ -56,7 +56,7 @@
 
 
       &__handle {
-        @include gradient($gray-200, $gray-300);
+        @include gradient(white, $gray-300);
 
         &__close {
           font-size: 1.5rem;

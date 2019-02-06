@@ -1,6 +1,5 @@
-<az-field-password :name="$name">
-    <slot name="label">
-        {{ $field->getLabel() }}
-    </slot>
-
-</az-field-password>
+@component('adminzone::components.fields.password', $attributes)
+    @slot('label')
+        {{ $label }}
+    @endslot
+@endcomponent

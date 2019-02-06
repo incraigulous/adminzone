@@ -1,5 +1,5 @@
-<az-field-text :value="$value" :name="$name">
-    <slot name="label">
-        {{ $field->getLabel() }}
-    </slot>
-</az-field-text>
+@component('adminzone::components.fields.text', $attributes)
+    @slot('label')
+        {{ $label }}
+    @endslot
+@endcomponent

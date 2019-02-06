@@ -1,7 +1,5 @@
-<az-field-upload :value="$value" :name="$name">
-    
-    <slot name="label">
-        {{ $field->getLabel() }}
-    </slot>
-
-</az-field-upload>
+@component('adminzone::components.fields.upload', $attributes)
+    @slot('label')
+        {{ $label }}
+    @endslot
+@endcomponent

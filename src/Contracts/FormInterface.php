@@ -12,4 +12,5 @@ interface FormInterface extends ItemInterface
     public function getSuccessMessage(): string;
     public function getSubmission(): SubmissionInterface;
     public function getMain(): SectionInterface;
+    public function getFields(): Elements;
 }

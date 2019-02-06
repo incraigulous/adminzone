@@ -10892,11 +10892,9 @@ main {
 }
 
 .top-bar .avatar {
-  margin-top: -15px;
-  margin-bottom: -10px;
-  margin-left: 0.5rem;
-  width: 40px;
-  height: 40px;
+  width: 58px;
+  height: 58px;
+  border-radius: 0px;
 }
 
 .breadcrumb {
@@ -11009,7 +11007,7 @@ main {
 }
 
 .overlay-stack__overlay-container .overlay-stack__overlay__handle {
-  background-image: linear-gradient(0deg, #e9ecef, #dee2e6);
+  background-image: linear-gradient(0deg, white, #dee2e6);
 }
 
 .overlay-stack__overlay-container .overlay-stack__overlay__handle__close {

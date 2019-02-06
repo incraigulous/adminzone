@@ -1,10 +1,12 @@
 <?php
 $attributes['class'] = $attributes['class'] . ' ' . 'form-control';
+
+unset($attributes['value'])
 ?>
 <?php
     $confirmationAttributes = $confirmationAttributes ?? array_merge($attributes, [
         'name' => $attributes['name'] . '_confirmation',
-        'placeholder' => 'confirm'
+        'placeholder' => 'confirm',
     ]);
 ?>
 <az-form-group>
@@ -17,10 +19,10 @@ $attributes['class'] = $attributes['class'] . ' ' . 'form-control';
     <div class="w-100">
         <div class="row">
             <div class="col-sm-6">
-                <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="password" value="{{ $value }}">
+                <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="password" autocomplete="new-password"  data-lpignore="true">
             </div>
             <div class="col-sm-6">
-                <input {!! AZ::helpers()->toHtmlAttributes($confirmationAttributes); !!} type="password" value="{{ $value }}">
+                <input {!! AZ::helpers()->toHtmlAttributes($confirmationAttributes); !!} type="password" autocomplete="new-password" data-lpignore="true">
             </div>
         </div>
     </div>

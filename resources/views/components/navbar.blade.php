@@ -9,15 +9,15 @@
 ?>
 <nav {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>
     @if(isset($left))
-        <div class="flex-grow-0">
+        <div class="flex-grow-0 d-flex">
             {{ $left }}
         </div>
     @endif
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 d-flex">
         {{ $slot }}
     </div>
     @if(isset($right))
-        <div class="flex-grow-0">
+        <div class="flex-grow-0 d-flex">
             {{ $right }}
         </div>
     @endif

@@ -1,5 +1,5 @@
 import { Controller } from "stimulus"
-import Overlay from "../Overlay"
+import {EventBusSingleton as events} from "light-event-bus"
 
 export default class extends Controller {
     inClass = 'overlay-stack__overlay-container--in'
@@ -10,11 +10,7 @@ export default class extends Controller {
 
     close() {
         this.element.classList.remove(this.inClass)
-
-        this.element.addEventListener("transitionend", this.remove.bind(this), true);
+        events.publish('overlay:close', this.element.parentElement.id)
     }
 
-    remove() {
-        this.element.remove()
-    }
 }

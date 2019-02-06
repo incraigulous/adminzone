@@ -29,7 +29,11 @@ class ModelRepository extends Repository implements RepositoryInterface
 
     public function find($id)
     {
-        return $this->model->find($id);
+        $result = $this->model->find($id);
+        if ($result instanceof Collection) {
+            return $result->first();
+        }
+        return $result;
     }
 
     public function all(): Collection

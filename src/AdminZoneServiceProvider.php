@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\View;
 use Incraigulous\AdminZone\ViewComposers\FieldComposer;
 use Incraigulous\AdminZone\ViewComposers\FieldElementComposer;
 use Incraigulous\AdminZone\ViewComposers\LayoutComposer;
+use Incraigulous\AdminZone\ViewComposers\RelatedEntryComposer;
 use Spatie\BladeX\ComponentDirectory\NamespacedDirectory;
 use Spatie\BladeX\Facades\BladeX;
 use SplFileInfo;
@@ -103,6 +104,12 @@ class AdminZoneServiceProvider extends ServiceProvider
             $this->getViewsInPath('adminzone::elements/fields/'),
             FieldElementComposer::class
         );
+
+        View::composer(
+            'adminzone::components/related-entry',
+            RelatedEntryComposer::class
+        );
+
     }
 
     public function getViewsInPath($path)

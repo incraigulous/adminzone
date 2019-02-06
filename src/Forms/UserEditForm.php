@@ -3,6 +3,7 @@
 namespace Incraigulous\AdminZone\Forms;
 
 
+use Illuminate\Support\Facades\Route;
 use Incraigulous\AdminZone\Contracts\SectionInterface;
 use Incraigulous\AdminZone\Contracts\SubmissionInterface;
 use Incraigulous\AdminZone\Fields\EmailField;
@@ -21,7 +22,7 @@ class UserEditForm extends UserCreateForm
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email,'. request()->route('id'),
             'password' => 'confirmed'
         ];
     }

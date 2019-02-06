@@ -6,7 +6,7 @@ $submit = $submit ?? null;
 $submitLabel = $submitLabel ?? 'Submit';
 $dataAction = isset($dataAction) ? $dataAction . ' ' : '';
 $dataAction = $dataAction . 'submit->form#submit';
-$shouldRedirect = $shouldRedirect ?? request()->headers->has('x-layout') !== 'overlay';
+$shouldRedirect = $shouldRedirect ?? request()->headers->get('x-layout') !== 'overlay';
 
 $attributes = $attributes ?? [
         'method' => AZ::helpers()->formMethod($method),

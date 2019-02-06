@@ -38,7 +38,8 @@ $buttonAttributes = [
     'href' => $href,
     'title' => $title,
     'data-action' => $dataAction,
-    'data-target' => $dataTarget ?? null
+    'data-target' => $dataTarget ?? null,
+    'data-id' => $dataId ?? null
 ];
 
 ?>

@@ -8,7 +8,7 @@ use Incraigulous\AdminZone\Contracts\ElementInterface;
 /**
  * Class Element
  */
-abstract class Element extends Item
+abstract class Element extends Item implements ElementInterface
 {
     public function setLabel(string $label): ElementInterface
     {
@@ -22,5 +22,10 @@ abstract class Element extends Item
             $this->label = parent::label();
         }
         return $this->label;
+    }
+
+    public function getAttributes(): array
+    {
+        return [];
     }
 }

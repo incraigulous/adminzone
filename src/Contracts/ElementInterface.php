@@ -14,4 +14,5 @@ use Illuminate\Contracts\Support\Jsonable;
 interface ElementInterface extends Arrayable, Jsonable
 {
     public function setLabel(string $label): ElementInterface;
+    public function getAttributes(): array;
 }

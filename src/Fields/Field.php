@@ -81,6 +81,13 @@ abstract class Field extends Element implements FieldInterface
         return 'adminzone::elements.fields.' . $this->getSlug();
     }
 
+    public function getAttributes(): array
+    {
+        return [
+            'default' => $this->default
+        ];
+    }
+
     public function handleSubmission(Request $request, array &$payload)
     {
         $name = $this->name;

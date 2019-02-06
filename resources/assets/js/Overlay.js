@@ -8,16 +8,21 @@ class Overlay {
     closeCallback = function(){}
     failCallback = function(){}
     loadCallback = function(){}
+    submitCallback = function(){}
     id = ''
 
     constructor () {
         this.id = 'overlay-' + uniqid()
         events.publish('overlay:register', this)
+        events.subscribe('overlay:close', this.handleClose.bind(this))
+        events.subscribe('form:submitted', this.handleFormSubmitted.bind(this))
     }
 
     load({path, params = {}, headers = {}, direction = 'right'}) {
         headers['x-layout'] = 'overlay'
         headers['x-overlay-direction'] = direction
+        headers['x-ctx'] = this.id
+
         http.get(path, {
             params,
             headers
@@ -46,12 +51,18 @@ class Overlay {
         this.failCallback(error)
     }
 
-    close(data) {
+    handleClose(id) {
+        if (id === this.id) {
+            this.close()
+        }
+    }
+
+    close() {
         if (this.element) {
             this.element.remove()
             this.element = null
         }
-        this.closeCallback(data)
+        this.closeCallback()
     }
 
     onClose(callback) {
@@ -64,6 +75,18 @@ class Overlay {
 
     onLoad(callback) {
         this.loadCallback = callback
+    }
+
+    onSubmit(callback) {
+        this.submitCallback = callback
+    }
+
+    handleFormSubmitted({response, ctx}) {
+        if (ctx !== this.id) {
+            return
+        }
+
+        this.submitCallback(response)
     }
 }
 

@@ -14,7 +14,8 @@ Route::middleware(['web', config('adminzone.middleware')])
             Route::put('resources/{slug}/{id}', 'ResourceController@update')->name('adminzone::resource.update');
             Route::get('resources/{slug}/create', 'ResourceController@create')->name('adminzone::resource.create');
             Route::post('resources/{slug}', 'ResourceController@store')->name('adminzone::resource.store');
-            Route::get('resources/{slug}/select', 'ResourceController@select')->name('adminzone::resource.select');
+            Route::get('resources/{slug}/relationships', 'RelationshipController@index')->name('adminzone::resource.relationships.index');
+            Route::get('resources/{slug}/{id}/field', 'FieldController@show')->name('adminzone::resource.field.show');
             Route::get('resources/{slug}/{id}', 'ResourceController@show')->name('adminzone::resource.show');
         });
     });

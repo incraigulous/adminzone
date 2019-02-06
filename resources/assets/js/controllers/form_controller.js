@@ -1,6 +1,7 @@
 import {Controller} from "stimulus"
 import http from '../http'
-import {renderFirstValidationError} from "../helpers"
+import {nextTick} from "../helpers"
+import {EventBusSingleton as events} from "light-event-bus"
 
 export default class extends Controller
 {
@@ -37,6 +38,13 @@ export default class extends Controller
     get formControlElements()
     {
         return this.element.querySelectorAll('.form-control')
+    }
+
+    get ctx() {
+        let overlay = this.element.closest("div[data-controller=overlay]");
+        if (overlay) {
+            return overlay.parentElement.getAttribute('id')
+        }
     }
 
     /**
@@ -114,8 +122,10 @@ export default class extends Controller
         })
     }
 
-    handleSuccess = ({data}) =>
+    handleSuccess = (response) =>
     {
+        let data = response.data
+
         if (this.data.get('shouldRedirect')) {
             if (data.redirect) {
                 window.location = data.redirect
@@ -130,6 +140,13 @@ export default class extends Controller
         this.successAlertTarget.classList.remove('d-none')
         this.submitButtonTarget.disabled = false
         this.errorAlertTarget.classList.add('d-none')
+
+        nextTick(() => {
+            events.publish('form:submitted', {
+                response,
+                ctx: this.ctx
+            })
+        })
     }
 
     afterSubmission = () =>

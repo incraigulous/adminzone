@@ -1,11 +1,11 @@
 <?php
     $logoutUrl = \Route::has('logout') ? url()->route('logout') : '/logout';
 ?>
-<az-dropdown alignment="right">
+<az-dropdown alignment="right" class="d-flex">
     <az-button theme="secondary">
         {{ auth()->user()->name }}
-        @if(auth()->user()->avatar)<img class="rounded-circle avatar" src="{{ auth()->user()->avatar->file }}">@endif
     </az-button>
+    @if(auth()->user()->avatar)<img class="img-thumbnail border-0 avatar p-0 d-flex" src="{{ auth()->user()->avatar->file }}">@endif
     <slot name="menu">
         <az-form-link :href="$logoutUrl">
             <az-dropdown-item>

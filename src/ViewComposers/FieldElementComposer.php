@@ -22,19 +22,38 @@ class FieldElementComposer
 
         $name = $data['name'] ?? null;
         $entry = $data['entry'] ?? null;
-        $value = $data['value'] ?? null;
         $field = $data['field'] ?? null;
+        $resource = $data['resource'] ?? null;
+        $attributes = ($field) ? $field->getAttributes() : [];
+        $label = $data['label'] ?? null;
+        $slug = $resource ? $resource->getSlug() : null;
+        $entryId = ($entry) ? $entry->id : null;
+        $value = $data['value'] ?? null;
 
         if ($field && !$name) {
             $name = $field->getName();
         }
-        $value = $value ? $value : old($name);
-
-        if ($entry && $name && !$value) {
-            $value = $entry->$name;
+        if ($field && !$label) {
+            $label = $field->getLabel();
         }
 
-        $view->with('name', $name);
-        $view->with('value', $value);
+        if ($value === 'delete') {
+            $value = null;
+        } elseif (!$value) {
+            $value = old($name);
+
+            if ($entry && $name && !$value) {
+                $value = $entry->$name;
+            }
+        }
+
+        $attributes['name'] = $name;
+        $attributes['value'] = $value;
+        $attributes['entry'] = $entry;
+        $attributes['entryId'] = $entryId;
+        $attributes['slug'] = $slug;
+
+        $view->with('label', $label);
+        $view->with('attributes', $attributes);
     }
 }

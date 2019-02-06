@@ -9,6 +9,7 @@ use Incraigulous\AdminZone\Fields\BelongsToField;
 use Incraigulous\AdminZone\Fields\EmailField;
 use Incraigulous\AdminZone\Fields\PasswordField;
 use Incraigulous\AdminZone\Fields\TextField;
+use Incraigulous\AdminZone\Resources\Asset;
 use Incraigulous\AdminZone\Sections\FieldSet;
 use Incraigulous\AdminZone\Sections\Section;
 use Incraigulous\AdminZone\Submissions\UserSubmission;
@@ -23,7 +24,7 @@ class UserCreateForm extends Form
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email,'. request()->route('id'),
             'password' => 'required|confirmed'
         ];
     }
@@ -33,7 +34,7 @@ class UserCreateForm extends Form
         $main->field(TextField::create('Name'))
             ->field(EmailField::create('Email'))
             ->field(PasswordField::create('password'))
-            ->field(BelongsToField::create('Avatar'));
+            ->field(BelongsToField::create('Avatar')->relatedTo(Asset::class));
 
         return $main;
     }

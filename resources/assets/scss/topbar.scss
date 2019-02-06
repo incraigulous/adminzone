@@ -13,10 +13,8 @@
   }
 
   .avatar {
-    margin-top: -15px;
-    margin-bottom: -10px;
-    margin-left: map_get($spacers, 2);
-    width: 40px;
-    height: 40px;
+    width: 58px;
+    height: 58px;
+    border-radius: 0px;
   }
 }

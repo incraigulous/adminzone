@@ -14,7 +14,7 @@
         </slot>
     @endif
     
-    <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="email" value="{{ $value }}">
+    <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="email" value="{{ $value }}" autocomplete="off" data-lpignore="true">
     {{ $slot }}
     <slot name="tip">
         <az-field-tip>{{ $error ?? '' }}</az-field-tip>
