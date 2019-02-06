@@ -15,3 +15,11 @@ export const parseResponseError = function(error) {
     } catch (e) {}
     return message
 }
+
+export const parseResponse = function({data}) {
+    if (data.data) {
+        data = data.data
+    }
+    return data
+
+}

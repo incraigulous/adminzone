@@ -120,4 +120,9 @@ class ModelRepository extends Repository implements RepositoryInterface
     {
         return collect($this->model->availableFields());
     }
+
+    public function sync($id, string $relationship, array $values)
+    {
+        $this->model->find($id)->$relationship()->sync($values);
+    }
 }

@@ -12,5 +12,6 @@ interface FieldInterface extends ElementInterface
     public static function create(string $label, string $name = null): Field;
     public function default($value): FieldInterface;
     public function getDefault();
-    public function handleSubmission(Request $request, array &$payload);
+    public function prepareSubmission(Request $request, array &$payload);
+    public function afterSubmission(Request $request, $entry, RepositoryInterface $repository);
 }

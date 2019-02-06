@@ -3,28 +3,21 @@ import Overlay from '../Overlay'
 import http from "../http"
 import Notification from "../Notification"
 import {EventBusSingleton as events} from "light-event-bus"
+import {parseResponse} from '../helpers'
 
 
 export default class extends Controller {
     overlay
-    static targets = ['field']
-
-    get value() {
-        if (this.hasFieldTarget) {
-            return this.fieldTarget.value
-        }
-        return null
-    }
-
-    get name() {
-        if (this.hasFieldTarget) {
-            return this.fieldTarget.name
-        }
-        return null
-    }
+    static targets = ['field', 'relationship']
 
     get id() {
         return this.data.get('id')
+    }
+
+    get value() {
+        return this.fieldTargets.map((el) => {
+            return el.value
+        })
     }
 
     initialize() {
@@ -39,8 +32,21 @@ export default class extends Controller {
         })
     }
 
-    remove() {
-        this.fieldTarget.value = null
+    findRelationshipTarget(id) {
+        return this.relationshipTargets.find((el) => {
+            return el.dataset.id === id
+        })
+    }
+
+    findFieldTarget(id) {
+        return this.fieldTargets.find((el) => {
+            return el.value === id
+        })
+    }
+
+    remove(e) {
+        e.preventDefault()
+        this.findRelationshipTarget(id).remove()
         this.fetch()
     }
 
@@ -51,36 +57,38 @@ export default class extends Controller {
     }
 
     handleEntrySelect({id}) {
-        this.fieldTarget.value = id
-        this.fetch()
+        this.fetch(id)
         this.overlay.close()
     }
 
-    openRelationship() {
+    openRelationship(e) {
+        let id = e.currentTarget.dataset.id
         this.overlay.load({
-            path: route('adminzone::resource.edit', {'slug': this.data.get('related-slug'), 'id': this.value})
+            path: route('adminzone::resource.edit', {'slug': this.data.get('related-slug'), 'id': id})
         })
     }
 
-    handleSubmit({data}) {
-        if (data.data) {
-            data = data.data
-        }
-        if (data.id) {
-            this.fieldTarget.value = data.id
-        }
-        this.fetch()
+    handleSubmit(response) {
+        data = parseResponse(response)
+        this.fetch(data.id)
         this.overlay.close()
     }
 
-    fetch() {
+    fetch(withId) {
         let url = route('adminzone::resource.field.show', {
             'slug': this.data.get('slug'),
             'id': this.data.get('id') ? this.data.get('id') : 'new'
         });
+
+        let value = this.value
+
+        if (withId && !value.includes(withId)) {
+            value.push(withId)
+        }
+
         http.get(url, {
             params: {
-                'value': this.value,
+                value,
                 'name': this.name
             }
         })

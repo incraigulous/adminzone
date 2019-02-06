@@ -3,6 +3,7 @@
 namespace Incraigulous\AdminZone\Fields;
 use Illuminate\Http\Request;
 use Incraigulous\AdminZone\Contracts\FieldInterface;
+use Incraigulous\AdminZone\Contracts\RepositoryInterface;
 use Incraigulous\AdminZone\Element;
 use Incraigulous\AdminZone\Exceptions\FieldTypeException;
 use Incraigulous\AdminZone\Fields\Types\FieldType;
@@ -88,11 +89,16 @@ abstract class Field extends Element implements FieldInterface
         ];
     }
 
-    public function handleSubmission(Request $request, array &$payload)
+    public function prepareSubmission(Request $request, array &$payload)
     {
         $name = $this->name;
         if ($request->has($name)) {
             $payload[$name] = $request->$name;
         }
+    }
+
+    public function afterSubmission(Request $request, $entry, RepositoryInterface $repository)
+    {
+        //Do nothing
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
  */
 class PasswordField extends Field
 {
-    public function handleSubmission(Request $request, array &$payload)
+    public function prepareSubmission(Request $request, array &$payload)
     {
         $name = $this->name;
         if ($request->has($name)) {

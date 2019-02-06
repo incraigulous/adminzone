@@ -26,4 +26,5 @@ interface RepositoryInterface
     public function search(string $string, $with = [], $perPage = 15): LengthAwarePaginator;
     public function isSearchable(): bool;
     public function availableFields(): Collection;
+    public function sync($id, string $relationship, array $values);
 }

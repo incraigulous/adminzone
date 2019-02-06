@@ -28,14 +28,20 @@ class Submission implements SubmissionInterface
     {
         $payload = [];
         $fields->each(function(Field $field) use ($request, &$payload) {
-            $field->handleSubmission($request, $payload);
+            $field->prepareSubmission($request, $payload);
         });
         $id = $request->route('id');
 
         if ($id) {
-            return $repository->update($id, $payload);
+            $entry = $repository->update($id, $payload);
         } else {
-            return $repository->create($payload);
+            $entry = $repository->create($payload);
         }
+
+        $fields->each(function(Field $field) use ($request, $entry, $repository) {
+            $field->afterSubmission($request, $entry, $repository);
+        });
+
+        return $entry;
     }
 }

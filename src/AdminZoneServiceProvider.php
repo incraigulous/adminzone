@@ -24,7 +24,9 @@ class AdminZoneServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        if (config('app.env') !== 'testing') {
+        $connection = config('database.default');
+        $driver = config("database.connections.{$connection}.driver");
+        if ($driver === 'mysql') {
             DB::statement("SET SESSION sql_mode = ''"); //TODO: Doing this for the searchable package. If they don't fix this issue by release, I should remove that package.
         }
         $this->publishes([
