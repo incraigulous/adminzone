@@ -12,7 +12,8 @@ $attributes = $attributes ?? [
     'class' => AZ::helpers()->classes('card', $class, "bg-{$themeColor}", "text-{$textColor}"),
     'href' => $href,
     'data-action' => $dataAction ?? null,
-    'data-target' => $dataTarget ?? null
+    'data-target' => $dataTarget ?? null,
+    'data-id' => $dataId ?? null
 ];
 ?>
 <{{ $element }} {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>

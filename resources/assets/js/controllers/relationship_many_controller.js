@@ -4,11 +4,11 @@ import http from "../http"
 import Notification from "../Notification"
 import {EventBusSingleton as events} from "light-event-bus"
 import {parseResponse} from '../helpers'
-
+import Sortable from 'sortablejs'
 
 export default class extends Controller {
     overlay
-    static targets = ['field', 'relationship']
+    static targets = ['field', 'relationship', 'entries']
 
     get id() {
         return this.data.get('id')
@@ -20,11 +20,28 @@ export default class extends Controller {
         })
     }
 
+    get selectEventName() {
+        return this.overlay.id + ":entry:select"
+    }
+
     initialize() {
         this.overlay = new Overlay()
         this.overlay.onSubmit(this.handleSubmit.bind(this))
-        events.subscribe(this.overlay.id + ":entry:select", this.handleEntrySelect.bind(this))
+        events.subscribe(this.selectEventName, this.handleEntrySelect.bind(this))
+        this.initSort()
     }
+
+    initSort() {
+        this.sortable = new Sortable(this.entriesTarget, {
+            animation: 150,
+            handle: '.relationship__entry__handle'
+        });
+    }
+
+    tearDownSort() {
+        this.sortable.destroy()
+    }
+
 
     openNew() {
         this.overlay.load({
@@ -34,19 +51,23 @@ export default class extends Controller {
 
     findRelationshipTarget(id) {
         return this.relationshipTargets.find((el) => {
-            return el.dataset.id === id
+            return el.dataset.id == id
         })
     }
 
     findFieldTarget(id) {
         return this.fieldTargets.find((el) => {
-            return el.value === id
+            return el.value == id
         })
+    }
+
+    idExists(id) {
+        return !!this.findFieldTarget(id)
     }
 
     remove(e) {
         e.preventDefault()
-        this.findRelationshipTarget(id).remove()
+        this.findRelationshipTarget(e.currentTarget.dataset.id).remove()
         this.fetch()
     }
 
@@ -69,8 +90,12 @@ export default class extends Controller {
     }
 
     handleSubmit(response) {
-        data = parseResponse(response)
-        this.fetch(data.id)
+        let data = parseResponse(response)
+        if (this.idExists(data.id)) {
+            this.fetch()
+        } else {
+            this.fetch(data.id)
+        }
         this.overlay.close()
     }
 
@@ -89,7 +114,7 @@ export default class extends Controller {
         http.get(url, {
             params: {
                 value,
-                'name': this.name
+                'name': this.data.get('name')
             }
         })
             .then(this.handleFetchSuccess.bind(this))
@@ -97,9 +122,11 @@ export default class extends Controller {
     }
 
     handleFetchSuccess({data: html}) {
+        this.tearDownSort()
         const temp = document.createElement("div")
         temp.innerHTML = html
-        this.element.innerHTML = temp.querySelector('[data-controller=relationship]').innerHTML
+        this.element.innerHTML = temp.querySelector('[data-controller=relationship-many]').innerHTML
+        this.initSort()
     }
 
     handleFetchFailure(error) {
@@ -115,5 +142,9 @@ export default class extends Controller {
             type: 'error',
             text: message ? message : 'Oops.. could not update field.'
         }).show();
+    }
+
+    disconnect() {
+        this.tearDownSort()
     }
 }

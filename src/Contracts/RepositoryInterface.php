@@ -15,6 +15,7 @@ interface RepositoryInterface
 {
     public function all(): Collection;
     public function find($id);
+    public function findMany(array $array): Collection;
     public function paginate($perPage = 15): LengthAwarePaginator;
     public function delete($id);
     public function update($id, array $input);
@@ -27,4 +28,5 @@ interface RepositoryInterface
     public function isSearchable(): bool;
     public function availableFields(): Collection;
     public function sync($id, string $relationship, array $values);
+    public function getManyToMany($id, $name);
 }

@@ -1,15 +1,3 @@
-<?php
-    $relatedEntry = null;
-    $id = null;
-    if (!empty($value)) {
-        if (is_object($value)) {
-            $relatedEntry = $value;
-            $value = $relatedEntry->id;
-        } else {
-            $relatedEntry = $relatedTo->getRepository()->find($value);
-        }
-    }
-?>
 <az-form-group>
     <div data-controller="relationship" data-relationship-slug="{{ $slug }}" data-relationship-related-slug="{{ $relatedTo->getSlug() }}" data-relationship-id="{{ $entryId }}" class="flex-grow-1">
         @if($label)
@@ -23,7 +11,7 @@
             </slot>
         @endif
         
-        <input type="hidden" name="{{ $name }}" value="{{ $value }}" data-target="relationship.field">
+        <input type="hidden" name="{{ $name }}" value="{{ $value ? $value->id : null }}" data-target="relationship.field">
 
         @if(!$value)
             <az-card class="w-100">
@@ -38,11 +26,11 @@
                     <div class="d-flex">
                         <div class="flex-grow-1"  data-action="click->relationship#openRelationship">
                             <div>
-                                <b>{{ $relatedEntry->label }}</b>
+                                <b>{{ $value->label }}</b>
                             </div>
-                            @if($relatedEntry->description)
+                            @if($value->description)
                                 <div class="small text-secondary">
-                                    {{ $relatedEntry->description }}
+                                    {{ $value->description }}
                                 </div>
                             @endif
                         </div>

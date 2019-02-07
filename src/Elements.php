@@ -15,15 +15,28 @@ class Elements extends Collection
 {
     public function getFields(): Elements
     {
-        return $this->filter(function($item) {
-            return ($item instanceof Field);
-        });
+        return $this->reduce(function($elements, $item) {
+            if ($item instanceof Field) {
+                $elements->push($item);
+            } else {
+                $item->getFields()->each(function($f) use (&$elements) {
+                    $elements->push($f);
+                });
+            };
+            return $elements;
+        }, new Elements([]));
     }
 
     public function getSections(): Elements
     {
-        return $this->filter(function($item) {
-            return $item instanceof Section;
-        });
+        return $this->reduce(function($elements, $item) {
+            if ($item instanceof Section) {
+                $elements->push($item);
+                $item->getSections()->each(function($f) use (&$elements) {
+                    $elements->push($f);
+                });
+            };
+            return $elements;
+        }, new Elements([]));
     }
 }

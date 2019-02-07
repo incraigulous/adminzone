@@ -12,5 +12,4 @@ export default class extends Controller {
         this.element.classList.remove(this.inClass)
         events.publish('overlay:close', this.element.parentElement.id)
     }
-
 }

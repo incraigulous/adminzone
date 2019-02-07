@@ -10866,6 +10866,7 @@ main {
   flex-direction: column;
   overflow-y: scroll;
   overflow-x: hidden;
+  flex-basis: 100%;
 }
 
 .footer {
@@ -10909,9 +10910,9 @@ main {
   box-sizing: border-box;
   background: transparent;
   border-right: solid 5px;
-  width: 300px;
+  flex-grow: 0;
   box-shadow: 11px 11px 35px -6px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 15px 30px;
   z-index: 1;
 }
 
@@ -10919,6 +10920,7 @@ main {
   position: relative;
   padding: 15px 0;
   overflow-y: auto;
+  flex-grow: 1;
 }
 
 .footer {

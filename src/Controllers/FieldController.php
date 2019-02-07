@@ -19,7 +19,6 @@ class FieldController extends Controller
         $field = collect($form->getFields())->first(function($field) use ($name) {
             return $field->getName() === $name;
         });
-
         if (!$field) {
             return abort(404);
         }

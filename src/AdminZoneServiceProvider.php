@@ -111,7 +111,6 @@ class AdminZoneServiceProvider extends ServiceProvider
             'adminzone::components/related-entry',
             RelatedEntryComposer::class
         );
-
     }
 
     public function getViewsInPath($path)

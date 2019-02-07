@@ -12,7 +12,7 @@ use Incraigulous\AdminZone\Exceptions\SubmissionException;
 /**
  * Class Submission
  */
-class AssetSubmission implements SubmissionInterface
+class AssetSubmission extends Submission
 {
     /**
      * @param Form    $form

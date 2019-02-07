@@ -8,7 +8,6 @@
                 <az-button class="overlay-stack__overlay__handle__close" theme="danger" data-action="click->overlay#close">
                     <az-icon name="times-circle"></az-icon>
                 </az-button>
-        
             </div>
             <div class="flex-grow-1 overlay-stack__overlay__content">
                 @yield('main')

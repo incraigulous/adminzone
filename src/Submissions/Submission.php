@@ -16,6 +16,17 @@ use PhpParser\Node\Stmt\Return_;
  */
 class Submission implements SubmissionInterface
 {
+    public function preparePayload(Request $request, Elements $fields, RepositoryInterface $repository): array
+    {
+        $payload = [];
+
+        $fields->each(function(Field $field) use ($request, &$payload) {
+            $field->prepareSubmission($request, $payload);
+        });
+
+        return $payload;
+    }
+
     /**
      * @param Form    $form
      * @param Request $request
@@ -26,10 +37,8 @@ class Submission implements SubmissionInterface
      */
     public function submit(Request $request, Elements $fields, RepositoryInterface $repository)
     {
-        $payload = [];
-        $fields->each(function(Field $field) use ($request, &$payload) {
-            $field->prepareSubmission($request, $payload);
-        });
+        $payload = $this->preparePayload($request, $fields, $repository);
+
         $id = $request->route('id');
 
         if ($id) {
@@ -38,10 +47,21 @@ class Submission implements SubmissionInterface
             $entry = $repository->create($payload);
         }
 
-        $fields->each(function(Field $field) use ($request, $entry, $repository) {
-            $field->afterSubmission($request, $entry, $repository);
-        });
+        $this->handleAfterSave($request, $fields, $repository, $entry);
 
         return $entry;
+    }
+
+    /**
+     * @param Request             $request
+     * @param Elements            $fields
+     * @param RepositoryInterface $repository
+     * @param                     $entry
+     */
+    public function handleAfterSave(Request $request, Elements $fields, RepositoryInterface $repository, $entry): void
+    {
+        $fields->each(function (Field $field) use ($request, $entry, $repository) {
+            $field->afterSubmission($request, $entry, $repository);
+        });
     }
 }

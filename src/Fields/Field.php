@@ -85,7 +85,8 @@ abstract class Field extends Element implements FieldInterface
     public function getAttributes(): array
     {
         return [
-            'default' => $this->default
+            'default' => $this->default,
+            'field' => $this
         ];
     }
 

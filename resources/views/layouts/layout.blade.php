@@ -17,6 +17,12 @@
         <div class="body-wrapper" data-controller="dashboard">
             @section('sidebar')
                 <az-sidebar data-target="dashboard.sidebar">
+                    @if(config('adminzone.logo'))
+                        <div class="text-center mb-3">
+                            <img class="img-fluid" src="{{ config('adminzone.logo') }}">
+                        </div>
+                    @endif
+                    <h6 class="sidebar__brand mb-4 text-center">{{ config('app.name') }}</h6>
                     <az-resources-menu :resources="$resources"></az-resources-menu>
                 </az-sidebar>
             @show

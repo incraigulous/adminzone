@@ -9,7 +9,7 @@ use Incraigulous\AdminZone\Resources\Resource;
 /**
  * Class BelongsToField
  */
-class BelongsToMany extends Relationship
+class BelongsToManyField extends Relationship
 {
     public function prepareSubmission(Request $request, array &$payload)
     {
@@ -18,9 +18,11 @@ class BelongsToMany extends Relationship
 
     public function afterSubmission(Request $request, $entry, RepositoryInterface $repository)
     {
-
-        if ($request->has($this->name)) {
-            $request->sync($entry->id, $this->getRelationshipName(), $request->get($this->name));
-        }
+        $ids = collect($request->has($this->name) ? $request->get($this->name) : []);
+        $values = $ids->reduce(function($carry, $v)  {
+            $carry[$v] = ['order' => count($carry) + 1];
+            return $carry;
+        }, []);
+        $repository->sync($entry->id, $this->getName(), $values);
     }
 }

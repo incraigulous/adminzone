@@ -83,6 +83,13 @@ class ModelRepository extends Repository implements RepositoryInterface
         return $model;
     }
 
+    public function getManyToMany($id, $name) {
+        return $this->find($id)->$name()
+            ->withPivot('order')->get()->sortBy(function($item) {
+                return $item->pivot->order;
+            });
+    }
+
     public function isRevisionable(): bool
     {
         return array_key_exists(Revisionable::class, class_uses($this->model));

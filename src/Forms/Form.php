@@ -94,4 +94,11 @@ abstract class Form extends MenuItem implements FormInterface
     {
         return $this->getMain()->getFields();
     }
+
+    public function getSections(): Elements
+    {
+        $sections = $this->getMain()->getSections();
+        $sections->prepend($this->getMain());
+        return $sections;
+    }
 }

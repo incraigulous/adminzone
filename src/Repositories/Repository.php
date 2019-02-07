@@ -13,6 +13,13 @@ abstract class Repository implements RepositoryInterface
 {
     public $filters = [];
 
+    public function findMany(array $array): Collection
+    {
+        return collect($array)->map(function($id) {
+            return $this->find($id);
+        });
+    }
+
     public function revisions($id): Collection
     {
         return objection([]);

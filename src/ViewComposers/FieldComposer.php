@@ -2,6 +2,7 @@
 
 namespace Incraigulous\AdminZone\ViewComposers;
 
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Incraigulous\AdminZone\AdminZone;
 
@@ -44,6 +45,7 @@ class FieldComposer
         $label = $label ?? '';
         $before = $before ?? '';
 
+
         $view->with('name', $name);
         $view->with('label', $label);
         $view->with('placeholder', $placeholder);
@@ -55,5 +57,6 @@ class FieldComposer
         $view->with('before', $before);
         $view->with('value', $value);
         $view->with('entry', $entry);
+
     }
 }

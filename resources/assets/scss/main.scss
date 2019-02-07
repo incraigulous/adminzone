@@ -2,4 +2,5 @@ main {
   position: relative;
   padding: $grid-gutter-width/2 0;
   overflow-y: auto;
+  flex-grow: 1;
 }

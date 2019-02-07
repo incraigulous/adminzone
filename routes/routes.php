@@ -16,6 +16,7 @@ Route::middleware(['web', config('adminzone.middleware')])
             Route::post('resources/{slug}', 'ResourceController@store')->name('adminzone::resource.store');
             Route::get('resources/{slug}/relationships', 'RelationshipController@index')->name('adminzone::resource.relationships.index');
             Route::get('resources/{slug}/{id}/field', 'FieldController@show')->name('adminzone::resource.field.show');
+            Route::get('resources/{slug}/{id}/section', 'SectionController@show')->name('adminzone::resource.section.show');
             Route::get('resources/{slug}/{id}', 'ResourceController@show')->name('adminzone::resource.show');
         });
     });
