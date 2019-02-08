@@ -10,6 +10,7 @@ use Incraigulous\AdminZone\AdminZone;
 class DashboardController extends Controller
 {
     public function show() {
-        return view ('adminzone::dashboard.show');
+        $resources = AdminZone::resources();
+        return view ('adminzone::dashboard.show', compact('resources'));
     }
 }

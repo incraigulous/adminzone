@@ -29,4 +29,5 @@ interface RepositoryInterface
     public function availableFields(): Collection;
     public function sync($id, string $relationship, array $values);
     public function getManyToMany($id, $name);
+    public function count(): int;
 }

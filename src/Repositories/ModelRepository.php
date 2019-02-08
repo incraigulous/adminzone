@@ -132,4 +132,9 @@ class ModelRepository extends Repository implements RepositoryInterface
     {
         $this->model->find($id)->$relationship()->sync($values);
     }
+
+    public function count(): int
+    {
+        return $this->model->count();
+    }
 }

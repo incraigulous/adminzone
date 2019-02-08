@@ -65,7 +65,7 @@ class FieldElementComposer
 
             if (is_array($value)) {
                 $value = $field->getRelatedTo()->getRepository()->findMany($value);
-            } else {
+            } elseif ($entry) {
                 $value = $resource->getRepository()->getManyToMany($entry->id, $name);
             }
         }

@@ -21,7 +21,7 @@ class LayoutComposer
         $data = $view->getData();
 
         if (!isset($data['resources'])) {
-            $view->with('resources', AdminZone::toObject());
+            $view->with('resources', AdminZone::resources());
         }
     }
 }

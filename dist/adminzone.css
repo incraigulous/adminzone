@@ -10904,16 +10904,28 @@ main {
 }
 
 .sidebar {
-  -o-border-image: linear-gradient(0deg, #6c757d, #fff);
-     border-image: linear-gradient(0deg, #6c757d, #fff);
+  -o-border-image: linear-gradient(0deg, #fff, #6c757d);
+     border-image: linear-gradient(0deg, #fff, #6c757d);
   border-image-slice: 1;
   box-sizing: border-box;
   background: transparent;
   border-right: solid 5px;
   flex-grow: 0;
   box-shadow: 11px 11px 35px -6px rgba(0, 0, 0, 0.1);
-  padding: 15px 30px;
   z-index: 1;
+}
+
+.sidebar__brand {
+  background-color: #007bff;
+  padding: 30px;
+  margin-bottom: 30px;
+  color: white;
+  border-bottom: solid 1px #dee2e6;
+  text-align: center;
+}
+
+.sidebar__content {
+  padding: 15px;
 }
 
 main {

@@ -34,9 +34,12 @@ class AdminZoneServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/adminzone'),
             __DIR__.'/../resources/assets' => resource_path('vendor/adminzone')
         ], 'assets');
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/adminzone'),
+        ], 'views');
 
         $this->publishes([
             __DIR__.'/../dist' => public_path('vendor/adminzone'),
