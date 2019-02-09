@@ -105,6 +105,9 @@ export default class extends Controller
             message = Object.values(response.data.errors)[0]
             this.showFieldErrors(response.data.errors)
         }
+        if (response && response.data.message) {
+            message = response.data.message
+        }
         this.errorAlertTarget.innerHTML = message
         this.errorAlertTarget.classList.remove('d-none')
     }

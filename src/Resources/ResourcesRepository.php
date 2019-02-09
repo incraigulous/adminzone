@@ -23,6 +23,9 @@ class ResourcesRepository
 
     public static function search(string $query, array $resourcesSlugs = []): Collection
     {
+        if (!$query) {
+            return new Collection([]);
+        }
         $resources = static::getSearchableResources()->filter(function($resource) use ($resourcesSlugs) {
             if (!count($resourcesSlugs)) return true;
             return in_array($resource->getSlug(), $resourcesSlugs);

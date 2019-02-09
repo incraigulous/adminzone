@@ -20,6 +20,7 @@ export default class extends Controller {
 
     handleFilterClick(e) {
         e.preventDefault()
+        console.log('here')
         let checkbox = e.currentTarget.querySelector('input[type=checkbox]')
         checkbox.checked = !checkbox.checked
     }

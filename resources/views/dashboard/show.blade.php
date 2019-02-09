@@ -10,21 +10,28 @@
 
 @section('main')
     <div class="container-fluid">
-        <div class="row">
-            @foreach($resources as $resource)
-                <div class="col-sm-6">
-                    <az-card themeColor="white" class="mb-4 text-center">
-                        <az-card-body>
-                            <az-card-title>
+        <div class="p-5">
+            <div class="row">
+                @foreach($resources as $resource)
+                    <div class="col-sm-6">
+                        <az-card themeColor="white" class="mb-4 text-center">
+                            <az-card-header class="text-uppercase font-weight-bolder text-secondary">
                                 Total {{ $resource->getCollectionLabel() }}
-                            </az-card-title>
-                            <h1>
-                                {{ $resource->getRepository()->count() }}
-                            </h1>
-                        </az-card-body>
-                    </az-card>
-                </div>
-            @endforeach
+                            </az-card-header>
+                            <az-card-body class="lead">
+                                <h1 class="text-primary">
+                                    {{ $resource->getRepository()->count() }}
+                                </h1>
+                            </az-card-body>
+                            <az-card-footer>
+                                <a class="btn btn-secondary btn-block" href="{{ $resource->getPath() }}">
+                                    Go to {{ $resource->getCollectionLabel() }}
+                                </a>
+                            </az-card-footer>
+                        </az-card>
+                    </div>
+                @endforeach
+            </div>
         </div>
         
     </div>

@@ -10873,6 +10873,10 @@ main {
   flex-grow: 0;
 }
 
+.no-pointer-events {
+  pointer-events: none;
+}
+
 .nav .nav-link.active {
   font-weight: bold;
 }

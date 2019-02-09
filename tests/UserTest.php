@@ -102,12 +102,8 @@ class UserTest extends TestCase
                 'id' => $user->id
             ]),
             $payload
-        );
+        )->assertResponseOk();
         $new = User::find(\DB::getPdo()->lastInsertId());
-        $result->assertRedirectedTo(route($resource->getEditRoute(), [
-            'slug' => $resource->getSlug(),
-            'id' => $new->id
-        ]));
         $this->assertEquals($user->email, $new->email);
     }
 

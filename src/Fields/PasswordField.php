@@ -13,7 +13,7 @@ class PasswordField extends Field
     public function prepareSubmission(Request $request, array &$payload)
     {
         $name = $this->name;
-        if ($request->has($name)) {
+        if ($request->get($name)) {
             $payload[$name] = bcrypt($request->$name);
         }
         return $payload;

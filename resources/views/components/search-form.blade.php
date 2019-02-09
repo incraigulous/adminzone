@@ -7,7 +7,7 @@
                     @foreach($resources as $item)
                         <az-dropdown-item data-action="click->search#handleFilterClick">
                             <div class="form-check justify-content-start">
-                                <input type="checkbox" name="filter[]" class="form-check-input" value="{{ $item->getSlug() }}">
+                                <input type="checkbox" name="filter[]" class="form-check-input no-pointer-events" value="{{ $item->getSlug() }}">
                                 <label class="form-check-label pl-2">
                                     {{ $item->getCollectionLabel() }}
                                 </label>

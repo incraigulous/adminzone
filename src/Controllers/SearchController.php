@@ -13,11 +13,8 @@ use Incraigulous\AdminZone\Resources\ResourcesRepository;
 class SearchController extends Controller
 {
     public function index(Request $request) {
-        $query = $request->get('q');
-        $filters = $request->has('filters') ? $request->get('filters') : [];
-        if (!$query) {
-            throw new RequestException('Please complete the search field.');
-        }
+        $query = $request->get('q') ? $request->get('q') : '';
+        $filters = $request->has('filter') ? $request->get('filter') : [];
         $results = ResourcesRepository::search($query, $filters);
         return view('adminzone::search.index', compact('query', 'results'));
     }

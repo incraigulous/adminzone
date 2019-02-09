@@ -19,7 +19,7 @@ class FieldSetTest extends TestCase
         $label = 'Your Name';
         $fieldset = new FieldSet();
         $fieldset->setLabel('Your Name');
-        $this->assertEquals($label, $fieldset->label());
+        $this->assertEquals($label, $fieldset->getLabel());
     }
 
     public function testToArray()
