@@ -1,0 +1,27 @@
+.asset-preview {
+  border: solid 1px $gray-300;
+  background: $white;
+  padding: 5px;
+
+  &__content {
+    background-color: $light;
+    text-align: center;
+    padding: $grid-gutter-width;
+
+    .icon {
+      font-size: 3rem;
+      margin-bottom: $spacer;
+    }
+
+    &__type {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+    &__filename {
+      font-size: .8rem;
+      color: $text-muted;
+      font-style: italic;
+    }
+
+  }
+}

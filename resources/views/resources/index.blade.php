@@ -46,9 +46,7 @@
                                     <th scope="row">{{ $item->$field }}</th>
                                 @else
                                     <td>
-                                        {!! AZ::helpers()->callbackOr(function($field, $item) {
-                                            return $item->$field;
-                                        }, $field, $item) !!}
+                                        @include('adminzone::resources.includes.field', ['field' => $field, 'entry' => $item])
                                     </td>
                                 @endif
                             @endforeach

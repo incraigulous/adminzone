@@ -15,9 +15,6 @@ $attributes['class'] = $attributes['class'] . ' ' . 'form-control-file';
         </slot>
     @endif
     
-    @if($value)
-        <img class="img-thumbnail mb-2" src="{{ asset($value) }}">
-    @endif
     <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="file">
     
     {{ $slot }}

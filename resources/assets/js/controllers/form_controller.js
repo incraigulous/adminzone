@@ -110,6 +110,7 @@ export default class extends Controller
         }
         this.errorAlertTarget.innerHTML = message
         this.errorAlertTarget.classList.remove('d-none')
+        this.errorAlertTarget.scrollIntoView()
     }
 
     showFieldErrors(errors)
@@ -141,6 +142,7 @@ export default class extends Controller
         }
 
         this.successAlertTarget.classList.remove('d-none')
+        this.successAlertTarget.scrollIntoView()
         this.submitButtonTarget.disabled = false
         this.errorAlertTarget.classList.add('d-none')
 

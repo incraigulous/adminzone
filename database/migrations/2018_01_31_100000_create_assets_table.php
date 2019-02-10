@@ -19,6 +19,7 @@ class CreateAssetsTable extends Migration
             $table->string('filename');
             $table->string('file');
             $table->string('filesystem');
+            $table->string('mime');
             $table->timestamps();
         });
     }

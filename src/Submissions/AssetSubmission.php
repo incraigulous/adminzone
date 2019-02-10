@@ -29,10 +29,12 @@ class AssetSubmission extends Submission
         $payload['title'] = $request->get('title');
 
         if ($request->hasFile('file')) {
-            $payload['file'] = $request->file('file')->store('assets', config('adminzone.filesystem'));
-            $payload['filename'] = $request->file('file')->getClientOriginalName();
+            $file =  $request->file('file');
+            $payload['file'] = $file->store('assets', config('adminzone.filesystem'));
+            $payload['filename'] = $file->getClientOriginalName();
+            $payload['mime'] = $file->getMimeType();
         }
-        if ($request->has('filename')) {
+        if ($request->get('filename')) {
             $payload['filename'] = $request->get('filename');
         }
         $payload['filesystem'] = config('adminzone.filesystem');

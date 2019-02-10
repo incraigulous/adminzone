@@ -16,4 +16,14 @@ class Asset extends Model
             'title' => 10
         ],
     ];
+
+    public function getTypeAttribute()
+    {
+        $takeFirst = ['image', 'video'];
+        $parts = explode("/", $this->mime, 2);
+        if (in_array($parts[0], $takeFirst)) {
+            return $parts[0];
+        }
+        return $parts[1];
+    }
 }

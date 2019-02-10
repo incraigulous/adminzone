@@ -11066,3 +11066,31 @@ main {
   min-height: 47px;
 }
 
+.asset-preview {
+  border: solid 1px #dee2e6;
+  background: #fff;
+  padding: 5px;
+}
+
+.asset-preview__content {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 30px;
+}
+
+.asset-preview__content .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.asset-preview__content__type {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.asset-preview__content__filename {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+}
+

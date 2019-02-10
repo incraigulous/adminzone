@@ -31,9 +31,7 @@
                         <tr>
                             <th scope="row" class="no-wrap text-right">{{ $label }}</th>
                             <td class="pl-4">
-                                {!! AZ::helpers()->callbackOr(function($field, $item) {
-                                    return $item->$field;
-                                }, $field, $entry) !!}
+                                @include('adminzone::resources.includes.field', compact('field', 'entry'))
                             </td>
                         </tr>
                     @endforeach
