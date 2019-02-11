@@ -38,6 +38,14 @@ class AdminZoneServiceProvider extends ServiceProvider
         ], 'assets');
 
         $this->publishes([
+            __DIR__.'/../resources/assets/scss' => resource_path('vendor/adminzone/scss')
+        ], 'scss');
+
+        $this->publishes([
+            __DIR__.'/../resources/assets/js' => resource_path('vendor/adminzone/js')
+        ], 'js');
+
+        $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/adminzone'),
         ], 'views');
 
