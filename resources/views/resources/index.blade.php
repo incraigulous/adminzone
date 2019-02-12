@@ -27,9 +27,11 @@
             <div class="flex-grow-0 m-2">
                 {{ $items->links() }}
             </div>
-            <div class="flex-grow-0 m-2">
-                <az-button element="a" :href="route($resource->getCreateRoute(), ['slug' => $resource->getSlug()])">Create {{ $resource->getLabel() }}</az-button>
-            </div>
+            @if($resource->canCreate())
+                <div class="flex-grow-0 m-2">
+                    <az-button element="a" :href="route($resource->getCreateRoute(), ['slug' => $resource->getSlug()])">Create {{ $resource->getLabel() }}</az-button>
+                </div>
+            @endif
         </div>
         <az-card themeColor="white" class="p-4">
             <az-table>

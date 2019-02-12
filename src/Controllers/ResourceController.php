@@ -65,7 +65,7 @@ class ResourceController extends Controller
 
     public function create($slug) {
         $resource = AdminZone::findResource($slug);
-        if (!$resource) {
+        if (!$resource || !$resource->canCreate()) {
             return abort(404);
         }
         return view('adminzone::resources.create', compact('resource'));
@@ -73,6 +73,9 @@ class ResourceController extends Controller
 
     public function store(Request $request, $slug) {
         $resource = AdminZone::findResource($slug);
+        if (!$resource || !$resource->canCreate()) {
+            return abort(404);
+        }
         $form = $resource->getCreateForm();
         $this->validate($request, $form->getRules());
         $result = $form->getSubmission()->submit(

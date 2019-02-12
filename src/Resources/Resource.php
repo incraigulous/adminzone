@@ -66,6 +66,11 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return $this->form();
     }
 
+    public function canCreate(): bool
+    {
+        return $this->createRoute() ? true : false;
+    }
+
     protected function editForm()
     {
         return $this->form();

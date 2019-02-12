@@ -17,6 +17,9 @@
         <div class="mt-2 d-flex mx-3">
             <div class="flex-grow-1 mx-2"><az-page-title>{{ $entry->label }}</az-page-title></div>
             <div class="flex-grow-0 mx-2">
+                @if($resource->canCreate())
+                    <az-button element="a" :href="route($resource->getCreateRoute(), ['slug' => $resource->getSlug()])" class="mt-4" theme="secondary">New {{ $resource->getLabel() }}</az-button>
+                @endif
                 <az-button element="a" :href="route($resource->getEditRoute(), ['slug' => $resource->getSlug(), 'id' => $entry->id])" class="mt-4">Edit {{ $entry->label }}</az-button>
             </div>
         </div>
@@ -38,5 +41,10 @@
                 </az-table>
             </az-card-body>
         </az-card>
+        <div class="text-right mx-3">
+            <az-form-link method="DELETE" :href="route($resource->getDestroyRoute(), ['slug' => $resource->getSlug(), 'id' => $entry->id])">
+                <az-button class="mt-3" size="sm" theme="danger">Delete {{ $entry->label }}</az-button>
+            </az-form-link>
+        </div>
     </div>
 @endsection
