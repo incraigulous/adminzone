@@ -6,6 +6,6 @@
         'data-target' => $dataTarget ?? null
     ];
 ?>
-<aside {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>
+<aside {!! AZ::helpers()->toHtmlAttributes($attributes) !!} data-controller="toggle">
     {{ $slot }}
 </aside>

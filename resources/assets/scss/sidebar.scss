@@ -1,14 +1,18 @@
 .sidebar {
   @include border-gradient($white, $secondary);
+  transition: width .5s linear;
   border-right: solid 5px;
   flex-grow: 0;
   box-shadow: 11px 11px 35px -6px rgba(0,0,0,0.1);
   z-index: 1;
+  position: relative;
+
 
   &__brand {
     background-color: $primary;
     padding: $grid-gutter-width;
     margin-bottom: $grid-gutter-width;
+
     color: white;
     border-bottom: solid 1px $gray-300;
     text-align: center;
@@ -17,4 +21,33 @@
   &__content {
     padding: $grid-gutter-width/2;
   }
+
+  .toggle__button {
+    position: absolute;
+    top: 0;
+    right: -50px;
+  }
+
+
+  @include media-breakpoint-down(md) {
+    width: 0;
+    overflow-x: hidden;
+  }
+}
+
+.sidebar-open {
+  @include media-breakpoint-down(md) {
+    .sidebar {
+      width: 100%;
+    }
+
+    .d-sidebar-open-none {
+      display: none !important;
+    }
+
+    .invisible-sidebar-open {
+      opacity: 0 !important;
+    }
+  }
+
 }

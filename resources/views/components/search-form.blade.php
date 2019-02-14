@@ -1,4 +1,4 @@
-<form class="form-inline search" data-controller="search" data-action="submit->search#submit">
+<form class="{{ \AZ::helpers()->classes('form-inline', 'search', $class ?? null) }}" data-controller="search" data-action="submit->search#submit">
     <div data-controller="dropdown" class="dropdown">
         <az-input-group>
             <slot name="before">

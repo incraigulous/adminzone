@@ -1,11 +1,10 @@
 import { Controller } from "stimulus"
-import Chart from 'chart.js'
 
 export default class extends Controller {
     static targets = [ "canvas" ]
 
     chart
-    connect() {
+    toggle() {
         let ctx = this.canvasTarget.getContext('2d')
         this.chart = new Chart(ctx, {
             type: this.data.get("type"),

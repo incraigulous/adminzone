@@ -3,6 +3,7 @@ import { throttle } from 'throttle-debounce';
 import {nextTick} from '../helpers'
 
 export default class extends Controller {
+    sidebarOpenClass = 'sidebar-open'
     static targets = ['topbar', 'sidebar', 'footer', 'gutter']
 
     initialize() {
@@ -29,6 +30,27 @@ export default class extends Controller {
     get gutterWidth() {
         return this.hasGutterTarget ? this.gutterTarget.offsetWidth : 0
     }
+
+    get isSidebarOpen() {
+        return  document.body.classList.contains(this.sidebarOpenClass)
+    }
+
+    toggleSidebar() {
+        if (this.isSidebarOpen) {
+            this.closeSidebar()
+        } else {
+            this.openSidebar()
+        }
+    }
+
+    openSidebar() {
+        document.body.classList.add(this.sidebarOpenClass)
+    }
+
+    closeSidebar() {
+        document.body.classList.remove(this.sidebarOpenClass)
+    }
+
 
     setCSSVariables() {
         document.documentElement.style.setProperty("--dashboard-topbar-height", this.topbarHeight + 'px')

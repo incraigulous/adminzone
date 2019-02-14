@@ -14,7 +14,7 @@ $tip = $tip ?? '';
 <div {!! AZ::helpers()->toHtmlAttributes($attributes) !!}>
     <div class="row">
         @if($label)
-        <div class="col-sm-3 d-flex align-content-center justify-content-end align-items-right">
+        <div class="col-sm-3 d-flex align-content-center justify-content-sm-end align-items-right">
             <label class="mb-0 font-weight-bold">{{ $label }}</label>
         </div>
         @endif

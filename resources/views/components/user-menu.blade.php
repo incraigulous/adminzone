@@ -1,7 +1,8 @@
 <?php
     $logoutUrl = \Route::has('logout') ? url()->route('logout') : '/logout';
+    $class = \AZ::helpers()->classes('d-flex', $class ?? null);
 ?>
-<az-dropdown alignment="right" class="d-flex">
+<az-dropdown alignment="right" :class="$class">
     <az-button theme="secondary">
         {{ auth()->user()->name }}
     </az-button>

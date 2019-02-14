@@ -37,7 +37,7 @@
                 @show
                 @yield('utility-nav')
                 
-                <main>
+                <main class="invisible-sidebar-open">
                     <az-overlay-stack></az-overlay-stack>
                     @section('flash')
                         @if(Session::has('alert-message'))
@@ -50,7 +50,7 @@
                 </main>
                 
                 @section('footer')
-                    <az-footer data-target="dashboard.footer">
+                    <az-footer data-target="dashboard.footer" class="d-none d-lg-flex">
                         {!! config('adminzone.copyright') !!}
                     </az-footer>
                 @show

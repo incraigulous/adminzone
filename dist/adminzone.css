@@ -10913,10 +10913,12 @@ main {
   border-image-slice: 1;
   box-sizing: border-box;
   background: transparent;
+  transition: width 0.5s linear;
   border-right: solid 5px;
   flex-grow: 0;
   box-shadow: 11px 11px 35px -6px rgba(0, 0, 0, 0.1);
   z-index: 1;
+  position: relative;
 }
 
 .sidebar__brand {
@@ -10932,7 +10934,35 @@ main {
   padding: 15px;
 }
 
+.sidebar .toggle__button {
+  position: absolute;
+  top: 0;
+  right: -50px;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 0;
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .sidebar-open .sidebar {
+    width: 100%;
+  }
+
+  .sidebar-open .d-sidebar-open-none {
+    display: none !important;
+  }
+
+  .sidebar-open .invisible-sidebar-open {
+    opacity: 0 !important;
+  }
+}
+
 main {
+  transition: opacity 0.5s linear;
   position: relative;
   padding: 15px 0;
   overflow-y: auto;
