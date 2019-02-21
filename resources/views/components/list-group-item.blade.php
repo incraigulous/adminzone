@@ -4,6 +4,7 @@ $themeColor = $themeColor ?? 'white';
 $textColor = $textColor ?? AZ::helpers()->textColorFromTheme($themeColor);
 $attributes = $attributes ?? [
         'class' => AZ::helpers()->classes(
+            $class,
             'list-group-item',
             "bg-{$themeColor}",
             "text-{$textColor}"

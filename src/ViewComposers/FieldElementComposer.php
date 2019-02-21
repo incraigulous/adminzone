@@ -54,19 +54,26 @@ class FieldElementComposer
             if (!empty($value) && !is_object($value)) {
                 $value = $field->getRelatedTo()->repository()->find($value);
             }
-
         }
 
 
         if ($view->getName() === 'adminzone::elements.fields.belongs-to-many-field') {
             if (empty($value)) {
                 $value = collect([]);
-            }
-
-            if (is_array($value)) {
+            } elseif (is_array($value)) {
                 $value = $field->getRelatedTo()->getRepository()->findMany($value);
             } elseif ($entry) {
                 $value = $resource->getRepository()->getManyToMany($entry->id, $name);
+            }
+        }
+
+        if ($view->getName() === 'adminzone::elements.fields.has-many-field') {
+            if (empty($value)) {
+                $value = collect([]);
+            } elseif (is_array($value)) {
+                $value = $field->getRelatedTo()->getRepository()->findMany($value);
+            } elseif ($entry) {
+                $value = $resource->getRepository()->getHasMany($entry->id, $name);
             }
         }
 

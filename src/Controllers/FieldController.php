@@ -23,6 +23,6 @@ class FieldController extends Controller
             return abort(404);
         }
 
-        return view('adminzone::elements.fields.' . $field->getSlug(), compact('entry', 'field', 'value', 'resource', 'relatedTo'));
+        return view('adminzone::elements.fields.' . $field->getSlug(), compact('entry', 'field', 'value', 'resource'));
     }
 }

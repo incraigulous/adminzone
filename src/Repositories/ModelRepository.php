@@ -130,7 +130,45 @@ class ModelRepository extends Repository implements RepositoryInterface
 
     public function sync($id, string $relationship, array $values)
     {
-        $this->model->find($id)->$relationship()->sync($values);
+        return $this->model->find($id)->$relationship()->sync($values);
+    }
+
+    public function saveManyIds($id, string $relationship, array $ids)
+    {
+        return $this->saveMany($id, $relationship,
+            $this->findMany($ids)->all()
+        );
+    }
+
+    public function saveMany($id, string $relationship, array $models)
+    {
+        foreach($models as $i => $model) {
+            $model->order = $i;
+            $result = $this->model->find($id)->$relationship()->save($model);
+        }
+    }
+
+    public function syncHasMany($id, string $relationship, array $ids)
+    {
+        $model = $this->find($id);
+
+        $toDelete = $model->$relationship->filter(function($item) use ($ids) {
+            return !in_array($item->id, $ids);
+        });
+
+        $result = $this->saveManyIds($id, $relationship, $ids);
+
+        foreach($toDelete as $child) {
+            $key = $model->$relationship()->getForeignKeyName();
+            $child->$key = null;
+            $child->save();
+        }
+
+        return $result;
+    }
+
+    public function getHasMany($id, $name) {
+        return $this->find($id)->$name()->orderBy('order')->get();
     }
 
     public function count(): int

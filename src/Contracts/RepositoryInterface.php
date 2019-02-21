@@ -28,6 +28,9 @@ interface RepositoryInterface
     public function isSearchable(): bool;
     public function availableFields(): Collection;
     public function sync($id, string $relationship, array $values);
+    public function saveManyIds($id, string $relationship, array $ids);
+    public function saveMany($id, string $relationship, array $models);
     public function getManyToMany($id, $name);
     public function count(): int;
+    public function syncHasMany($id, string $relationship, array $ids);
 }
