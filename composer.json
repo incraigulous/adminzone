@@ -16,11 +16,11 @@
         "jeffochoa/validator-factory": "^1.0",
         "bentools/querystring": "^1.0",
         "spatie/laravel-translatable": "^3.1",
-        "spatie/laravel-blade-x": "^2.1",
         "incraigulous/objection": "1.0.1",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "tightenco/ziggy": "^0.6.9",
-        "nicolaslopezj/searchable": "^1.10"
+        "nicolaslopezj/searchable": "^1.10",
+        "spatie/laravel-blade-x": "^2.1"
     },
     "autoload": {
         "psr-4": {
