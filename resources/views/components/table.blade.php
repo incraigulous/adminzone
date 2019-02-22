@@ -12,9 +12,10 @@
         'class' => $class
     ]);
     $head = $head ?? null;
+    $element = $element ?? 'table';
 ?>
 <div class="table-container">
-    <table {!! $attributes !!}>
+    <{{ $element }} {!! $attributes !!}>
         @if($head)
             <thead class="{{ $headClass }}">
                 <tr>
@@ -25,5 +26,5 @@
         <tbody>
             {{ $slot }}
         </tbody>
-    </table>
+    </{{ $element }}>
 </div>
