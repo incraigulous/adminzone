@@ -1,5 +1,7 @@
 @extends('adminzone::layouts.dashboard')
 
+@section('title', 'Create ' . $resource->getLabel())
+
 @section('utility-nav')
     <az-navbar themeColor="white" class="utility-nav">
         <slot name="left">

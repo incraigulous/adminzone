@@ -16,6 +16,12 @@
     color: white;
     border-bottom: solid 1px $gray-300;
     text-align: center;
+
+    h1, h2, h3, h5, h5, h6 {
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
   }
 
   &__content {

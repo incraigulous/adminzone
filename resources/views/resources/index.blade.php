@@ -1,5 +1,7 @@
 @extends('adminzone::layouts.layout')
 
+@section('title', $resource->getCollectionLabel())
+
 @section('utility-nav')
     <az-navbar themeColor="white" class="utility-nav">
         <slot name="left">
