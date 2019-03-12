@@ -46,7 +46,7 @@ class Helpers
         return $callback(...$params);
     }
 
-    public function textColorFromTheme(string $themeColor): string
+    public function textColorFromTheme($themeColor): string
     {
         switch ($themeColor) {
             case 'light':
