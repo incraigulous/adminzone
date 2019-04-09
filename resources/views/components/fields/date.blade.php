@@ -1,6 +1,6 @@
 <?php
 $attributes['class'] = $attributes['class'] . ' ' . 'form-control';
-$value = $value && $value instanceOf DateTime ? $value->format('Y-m-d\TH:i:s') : $value;
+$value = $value && $value instanceOf DateTime ? $value->format('Y-m-d') : $value;
 ?>
 <az-form-group>
     @if($label)
@@ -13,7 +13,7 @@ $value = $value && $value instanceOf DateTime ? $value->format('Y-m-d\TH:i:s') :
             {{ $before }}
         </slot>
     @endif
-    <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="datetime-local" value="{{ $value }}">
+    <input {!! AZ::helpers()->toHtmlAttributes($attributes); !!} type="date" value="{{ $value }}">
     {{ $slot }}
     <slot name="tip">
         <az-field-tip>{{ $error ?? '' }}</az-field-tip>
