@@ -22,6 +22,10 @@ class CarbonFormatter implements FormatterInterface
     public function format($entry)
     {
         $name = $this->name;
-        return $entry->$name->format($this->format);
+        $value = $entry->$name;
+        if (!$value) {
+            return $value;
+        }
+        return $value->format($this->format);
     }
 }
