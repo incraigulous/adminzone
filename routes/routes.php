@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-
 Route::middleware(['web', config('adminzone.middleware')])
     ->namespace('Incraigulous\AdminZone\Controllers')
     ->group(function() {

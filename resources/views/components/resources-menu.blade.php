@@ -3,8 +3,10 @@
             Dashboard
     </az-nav-item>
     @foreach($resources as $resource)
-        <az-nav-item :href="route('adminzone::resource', ['slug' => $resource->getSlug()])">
-            {{ $resource->getCollectionLabel() }}
-        </az-nav-item>
+        @if($resource->canAccess())
+            <az-nav-item :href="route('adminzone::resource', ['slug' => $resource->getSlug()])">
+                {{ $resource->getCollectionLabel() }}
+            </az-nav-item>
+        @endif
     @endforeach
 </az-nav>

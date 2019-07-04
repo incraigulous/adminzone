@@ -66,11 +66,6 @@ abstract class Resource extends MenuItem implements ResourceInterface
         return $this->form();
     }
 
-    public function canCreate(): bool
-    {
-        return $this->createRoute() ? true : false;
-    }
-
     protected function editForm()
     {
         return $this->form();
@@ -233,5 +228,23 @@ abstract class Resource extends MenuItem implements ResourceInterface
     public function getDestroySubmission(): SubmissionInterface
     {
         return $this->destroySubmission();
+    }
+
+    public function canAccess(): bool
+    {
+        return true;
+    }
+
+    public function canCreate(): bool
+    {
+        if (!$this->canAccess()) {
+            return false;
+        }
+        return $this->createRoute() ? true : false;
+    }
+
+    public function canEdit(): bool
+    {
+        return $this->canAccess();
     }
 }
