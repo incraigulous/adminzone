@@ -247,4 +247,9 @@ abstract class Resource extends MenuItem implements ResourceInterface
     {
         return $this->canAccess();
     }
+
+    public function hidden(): bool
+    {
+        return false;
+    }
 }

@@ -21,5 +21,8 @@ interface ResourceInterface extends MenuItemInterface
     public function getDestroyRoute(): string;
     public function isSearchable(): bool;
     public function getFields(): array;
-
+    public function canAccess(): bool;
+    public function canCreate(): bool;
+    public function canEdit(): bool;
+    public function hidden(): bool;
 }

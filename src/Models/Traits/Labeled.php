@@ -8,9 +8,6 @@ namespace Incraigulous\AdminZone\Models\Traits;
  */
 trait Labeled
 {
-    protected $labelField = 'label';
-    protected $descriptionField = 'description';
-
     public function getLabelAttribute()
     {
         $fieldName = $this->labelField;

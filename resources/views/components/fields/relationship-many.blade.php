@@ -20,7 +20,7 @@
                                 <div class="flex-grow-0 relationship__entry__handle pr-3">
                                     <az-icon name="arrows-alt-v" class="text-secondary"></az-icon>
                                 </div>
-                                <div class="flex-grow-1" data-id="{{ $item->id }}" data-action="click->relationship-many#openRelationship">
+                                <div class="flex-grow-1" data-id="{{ $item->id }}" @if($relatedTo->canEdit() && $relatedTo->getEditForm())data-action="click->relationship-many#openRelationship"@endif>
                                     <div>
                                         <b>{{ $item->label }}</b>
                                     </div>
@@ -44,7 +44,9 @@
         
         <az-card class="w-100">
             <az-card-body>
-                <az-button theme="secondary" data-action="click->relationship-many#openNew">Create New</az-button>
+                @if($relatedTo->canCreate())
+                    <az-button theme="secondary" data-action="click->relationship-many#openNew">Create New</az-button>
+                @endif
                 <az-button theme="secondary" data-action="click->relationship-many#openExisting">Choose Existing</az-button>
             </az-card-body>
         </az-card>

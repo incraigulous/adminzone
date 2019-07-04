@@ -13,4 +13,7 @@ use Incraigulous\AdminZone\Models\Traits\Labeled;
 class Model extends \Illuminate\Database\Eloquent\Model
 {
     use Administratable;
+
+    protected $labelField = 'label';
+    protected $descriptionField = 'description';
 }

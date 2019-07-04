@@ -16,7 +16,7 @@
 @section('main')
     <div class="container-fluid">
         <az-page-title>{{ $entry->label }}</az-page-title>
-    
+
         @include(
             $resource->getEditForm()->getView(),
             [

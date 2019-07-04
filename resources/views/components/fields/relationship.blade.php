@@ -10,13 +10,15 @@
                 {{ $before }}
             </slot>
         @endif
-        
+
         <input type="hidden" name="{{ $name }}" value="{{ $value ? $value->id : null }}" data-target="relationship.field">
 
         @if(!$value)
             <az-card class="w-100">
                 <az-card-body>
-                    <az-button theme="secondary" data-action="click->relationship#openNew">Create New</az-button>
+                    @if($relatedTo->canCreate())
+                        <az-button theme="secondary" data-action="click->relationship#openNew">Create New</az-button>
+                    @endif
                     <az-button theme="secondary" data-action="click->relationship#openExisting">Choose Existing</az-button>
                 </az-card-body>
             </az-card>
@@ -38,7 +40,7 @@
                             <az-icon name="trash" class="text-danger"></az-icon>
                         </div>
                     </div>
-                    
+
                 </az-card-body>
             </az-card>
         @endif
