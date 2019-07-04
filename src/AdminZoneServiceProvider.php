@@ -73,7 +73,7 @@ class AdminZoneServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/adminzone.php', 'adminzone');
 
-        AdminZone::register(Config::get('adminzone.menu'));
+        AdminZone::register(Config::get('adminzone.resources'));
     }
 
     public function registerBladeXComponents()

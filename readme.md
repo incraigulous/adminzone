@@ -32,6 +32,8 @@ You can publish as much or as as you like. I recommended that you publish as lit
 - Register your resource in `config.adminzone` by adding `\App\Resources\User::class` to the menu array.
 - After you've created your resource, it will be available in the left sidebar of the admin. This is the minimum level of customization needed to add basic CRUD functionality for a model.
 
+## Resources
+
 #### Example resource
 
 ```php
@@ -72,4 +74,54 @@ You can publish as much or as as you like. I recommended that you publish as lit
         }
     }
 ```
+
+## Models
+
+Any model managed by the Admin use use the `Incraigulous\AdminZone\Models\Traits\Administratable` trait or extend `Incraigulous\AdminZone\Models\Model`.
+
+
+
+## Fields
+
+Fields are objects that can be added to forms to build up a form view and specify how submissions should be handled. 
+
+### Relationships 
+
+Relationships user interfaces can easily be added through the use of relationship fields.
+
+*Note: You must add an `order` int field to pivot tables to allow adminzone to control sort order.*
+
+### Relationship Fieids
+
+#### BelongsToField
+
+The belongs to field adds a field to a form that handles a belongs to resource. It will generate a field that allows the user to select and edit the related resource.
+
+```php
+    protected function main(SectionInterface $main): SectionInterface
+    {
+        $main->field(TextField::create('Email'))
+        ->$main->field(BelongsToField::create('User')->relatedTo(User::class));
+
+        return $main;
+    }
+```
+
+#### BelongsToManyField
+
+The belongs to many field adds a field to a form that handles a belongs to many resources. It will generate a field that allows the user to select and edit the related resource.
+
+```php
+    protected function main(SectionInterface $main): SectionInterface
+    {
+        $main->field(TextField::create('Post Title'))
+        $main->field(RichTextField::create('Content'))
+        ->$main->field(BelongsToManyField::create('Author')->relatedTo(Author::class));
+
+        return $main;
+    }
+```
+
+
+
 

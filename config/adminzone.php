@@ -34,7 +34,7 @@ return [
     | For the default implementation extend
     | Incraigulous\AdminZone\Resources\Resource
     */
-    'menu' => [
+    'resources' => [
         \Incraigulous\AdminZone\Resources\SearchableUser::class
     ],
 
